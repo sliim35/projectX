@@ -1,0 +1,38 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "eslint-config-prettier"
+  ],
+  "plugins": [
+    "import",
+    "react",
+    "react-hooks"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": "off",
+    "import/prefer-default-export": "off",
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "no-trailing-spaces": "error",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "react-hooks/rules-of-hooks": "error"
+  }
+}
