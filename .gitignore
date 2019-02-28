@@ -1,0 +1,37 @@
+# Project files
+public
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Dependency directories
+node_modules
+
+# npm, yarn
+.npm
+.yarn-integrity
+package-lock.json
+yarn.lock
+
+# Output of 'npm pack'
+*.tgz
+
+# eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+
+# IDE project files
+.DS_Store
+.idea
+.vscode
+out
+gen
