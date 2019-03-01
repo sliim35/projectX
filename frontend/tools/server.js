@@ -1,42 +1,20 @@
-/* eslint-disable */
 import webpack from 'webpack';
-import webpackConfig from '../webpack.config';
+import WebpackDevServer from 'webpack-dev-server';
+import config from '../webpack.config';
 
-function build() {
-  return new Promise((resolve, reject) => {
-    webpack(webpackConfig, (err, stats) => {
-      if (err) {
-        console.error(err.stack || err);
+const options = {
+  hot: true,
+  host: '0.0.0.0',
+  historyApiFallback: true,
+  contentBase: config.output.path,
+  watchContentBase: true,
+  compress: true,
+};
 
-        if (err.details) {
-          console.error(err.details);
-        }
+WebpackDevServer.addDevServerEntrypoints(config, options);
+const compiler = webpack(config);
+const server = new WebpackDevServer(compiler, options);
 
-        reject();
-      }
-
-      const info = stats.toJson();
-
-      if (stats.hasErrors()) {
-        console.error(info.errors);
-        reject();
-      }
-
-      if (stats.hasWarnings()) {
-        console.warn(info.warnings);
-      }
-
-      console.log(
-        stats.toString({
-          chunks: false, // Makes the build much quieter
-          colors: true, // Shows colors in the console
-        })
-      );
-    });
-  }).catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
-}
-
-export default build;
+server.listen(3000, 'localhost', () => {
+  console.log('dev server listening on port 3000');
+});

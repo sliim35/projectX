@@ -6,8 +6,7 @@
   "scripts": {
     "clear": "rimraf ./public/",
     "build": "npm run clear && babel-node tools/run build",
-    "start": "babel-node tools/server -- --debug",
-    "start:test": "webpack-dev-server --config ./webpack.config.js --mode development"
+    "start": "babel-node tools/server -- --debug"
   },
   "author": "",
   "license": "ISC",
@@ -46,5 +45,11 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
-  }
+  },
+  "browserslist": [
+    "last 4 versions",
+    "not < 2%",
+    "not dead",
+    "not ie 11"
+  ]
 }
