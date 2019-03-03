@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import { SideBarListStyled } from './styles/SideBarListStyled';
 
-export const SideBarList = ({ title, listItems }) => {
+export const SideBarList = ({ title, items }) => {
   return (
     <SideBarListStyled>
-      <h4 className="list-title">{title}</h4>
+      <h4 className="title">{title}</h4>
       <ul className="list-wrapper">
-        {listItems.map((item, index) => (
+        {items.map((item, index) => (
           <li key={index} className="list-item">
             <a href="/" className="list-item-link">
               {item}
@@ -21,6 +21,6 @@ export const SideBarList = ({ title, listItems }) => {
 };
 
 SideBarList.propTypes = {
-  listItems: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
 };
