@@ -1,9 +1,7 @@
 import React from 'react';
 
+import { NavBarStyled } from './styles/NavBarStyled';
+
 export const NavBar = () => {
-  return (
-    <div>
-      NavBar
-    </div>
-  );
+  return <NavBarStyled>Hello world</NavBarStyled>;
 };
