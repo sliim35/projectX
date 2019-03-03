@@ -39,11 +39,8 @@ module.exports = {
         },
       },
       {
-        test: /\.(ico|jpg|jpeg|png|webp|svg|gif|eot|otf|ttf|woff|woff2)(\?.*)?$/,
+        test: /\.(ttf|woff|woff2|jpeg)$/,
         loader: 'file-loader',
-        options: {
-          name: isDebug ? '[path][name].[ext]?[hash:8]' : '[hash:8].[ext]',
-        },
       },
     ],
   },
