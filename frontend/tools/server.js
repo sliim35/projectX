@@ -2,9 +2,11 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import config from '../webpack.config';
 
+console.log(config);
+
 const options = {
   hot: true,
-  host: '0.0.0.0',
+  host: 'localhost',
   historyApiFallback: true,
   contentBase: config.output.path,
   watchContentBase: true,
