@@ -14,4 +14,5 @@ export const theme = {
   sideBarColor: '#f8f8fa',
   textColor: '#676767',
   titleColor: '#444',
+  navBarZIndex: 100,
 };

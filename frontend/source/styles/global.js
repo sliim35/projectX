@@ -73,6 +73,12 @@ export const GlobalStyle = createGlobalStyle`
     margin: -1px;
   }
 
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+
   a:focus,
   button:focus,
   input:focus,
@@ -85,7 +91,38 @@ export const GlobalStyle = createGlobalStyle`
   h3,
   h4,
   h5 {
-    font-family: 'SFPro Display';
+    font-family: 'SFPro Display', sans-serif;
     font-weight: 600;
+    color: ${(props) => props.theme.titleColor}
+  }
+
+  h4,
+  h5 {
+    font-family: 'SFPro Text', sans-serif;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  h2 {
+    font-size: 1.625rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
+  }
+
+  p,
+  span {
+    font-family: 'SFPro Text';
+    font-weight: 400;
+    color: ${(props) => props.theme.textColor}
   }
 `;
