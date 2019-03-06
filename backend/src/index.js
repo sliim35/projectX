@@ -1,18 +1,28 @@
 import { GraphQLServer } from 'graphql-yoga';
 import { config } from 'dotenv';
+import axios from 'axios';
 
 config();
 
 const typeDefs = `
+  type Category {
+    id: ID!
+    name: String!
+    name_parameterized: String!
+  }
+
   type Query {
-    hello: String!
+    categories: [Category!]!
   }
 `;
 
 const resolvers = {
   Query: {
-    hello() {
-      return 'GraphQL test launch!';
+    async categories() {
+      const { data } = await axios.get(
+        'https://api.texenergo.com/public/catalogues/'
+      );
+      return data;
     },
   },
 };
