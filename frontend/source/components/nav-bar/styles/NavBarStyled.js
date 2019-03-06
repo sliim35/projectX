@@ -4,7 +4,7 @@ export const NavBarStyled = styled.nav`
   position: absolute;
   top: 0;
   right: 0;
-  width: 100%;
+  width: calc(100% - 240px);
   left: 240px;
   height: 64px;
   background-color: ${(props) => props.theme.navBarColor};
