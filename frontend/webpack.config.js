@@ -39,8 +39,12 @@ module.exports = {
         },
       },
       {
-        test: /\.(ttf|woff|woff2|jpeg)$/,
+        test: /\.(ttf|woff|woff2|jpeg|png)$/,
         loader: 'file-loader',
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
       },
     ],
   },
