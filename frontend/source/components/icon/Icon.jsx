@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const IconStyled = styled.svg`
   position: absolute;
   top: ${(props) => props.top}%;
-  margin-left: 32px;
+  margin-left: ${(props) => props.ml}px;
   transform: translateY(-50%);
   width: ${(props) => props.width || 24}px;
   height: ${(props) => props.height || 24}px;
@@ -15,10 +15,16 @@ const IconStyled = styled.svg`
 `;
 
 export const Icon = (props) => {
-  const { glyph, viewBox, width, height, top } = props;
+  const { glyph, viewBox, width, height, top, ml } = props;
 
   return (
-    <IconStyled width={width} height={height} top={top} viewBox={viewBox}>
+    <IconStyled
+      width={width}
+      height={height}
+      top={top}
+      viewBox={viewBox}
+      ml={ml}
+    >
       <use xlinkHref={`#${glyph}`} />
     </IconStyled>
   );
@@ -32,10 +38,12 @@ Icon.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   top: PropTypes.string,
+  ml: PropTypes.string,
 };
 
 Icon.defaultProps = {
   width: '24',
   height: '24',
   top: '48',
+  ml: '32',
 };
