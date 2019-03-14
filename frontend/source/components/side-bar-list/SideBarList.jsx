@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSpring, animated } from 'react-spring';
 
 import { Icon } from '../icon/Icon';
 import minusIcon from '../../static/icons/minus.svg';
@@ -9,6 +10,10 @@ import { SideBarListStyled } from './styles/SideBarListStyled';
 
 export const SideBarList = ({ title, items }) => {
   const [isExpand, setExpand] = useState(true);
+  const props = useSpring({
+    opacity: `${isExpand ? 1 : 0}`,
+    maxHeight: `${isExpand ? '500px' : '0'}`,
+  });
 
   return (
     <SideBarListStyled>
@@ -24,17 +29,15 @@ export const SideBarList = ({ title, items }) => {
           />
         </span>
       </button>
-      {isExpand && (
-        <ul className="list-wrapper">
-          {items.map((item) => (
-            <li key={item.id} className="list-item">
-              <a href="/" className="list-item-link">
-                {item.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <animated.ul className="list-wrapper" style={props}>
+        {items.map((item) => (
+          <li key={item.id} className="list-item">
+            <a href="/" className="list-item-link">
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </animated.ul>
     </SideBarListStyled>
   );
 };
