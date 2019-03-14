@@ -8,10 +8,10 @@ export const SideBarList = ({ title, items }) => {
     <SideBarListStyled>
       <h4 className="title">{title}</h4>
       <ul className="list-wrapper">
-        {items.map((item, index) => (
-          <li key={index} className="list-item">
+        {items.map((item) => (
+          <li key={item.id} className="list-item">
             <a href="/" className="list-item-link">
-              {item}
+              {item.name}
             </a>
           </li>
         ))}

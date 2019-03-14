@@ -21,14 +21,10 @@ const CartTextStyled = styled.span`
   line-height: 64px;
 `;
 
-const FixedPositionIcon = styled(Icon)`
-  top: 48%;
-`;
-
 export const NavRightWrapper = () => {
   return (
     <NavRightWrapperStyled>
-      <FixedPositionIcon
+      <Icon
         glyph={shoppingCartIcon.id}
         viewBox={shoppingCartIcon.viewBox}
         width="24"

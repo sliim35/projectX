@@ -15,7 +15,6 @@ const IconStyled = styled.svg`
 `;
 
 export const Icon = (props) => {
-  console.log(props);
   const { glyph, viewBox, width, height, top } = props;
 
   return (

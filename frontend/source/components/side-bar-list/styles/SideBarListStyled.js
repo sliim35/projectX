@@ -20,7 +20,6 @@ export const SideBarListStyled = styled.div`
   }
 
   .list-wrapper {
-    max-height: 500px;
     overflow: auto;
     color: ${(props) => props.theme.textColor};
     padding: 0;
