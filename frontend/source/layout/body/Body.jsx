@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Query } from 'react-apollo';
 import styled from 'styled-components';
 
 import { SideBar } from '../../components/side-bar/SideBar';
@@ -10,13 +10,9 @@ import { Footer } from '../../components/footer/Footer';
 import { NavContainer } from '../nav-container/NavContainer';
 import { Logo } from '../../components/logo/Logo';
 
-import { BodyStyled } from './styles/BodyStyled';
+import * as queries from '../../queries';
 
-const listItems = [
-  'Светотехнические изделия',
-  'Инструмент электромонтажный',
-  'Высоковольтные комплектные устройства',
-];
+import { BodyStyled } from './styles/BodyStyled';
 
 const title = 'Категории';
 
@@ -34,7 +30,14 @@ export const Body = () => {
         <LogoWrapperStyled>
           <Logo />
         </LogoWrapperStyled>
-        <SideBarList title={title} items={listItems} />
+        <Query query={queries.CATALOGUES_QUERY}>
+          {({ loading, error, data }) => {
+            if (loading) return 'Loading...';
+            if (error) return `Error! ${error.message}`;
+
+            return <SideBarList title={title} items={data.categories} />;
+          }}
+        </Query>
       </SideBar>
       <NavBar>
         <NavContainer />
