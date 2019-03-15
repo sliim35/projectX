@@ -1,34 +1,11 @@
 import { GraphQLServer } from 'graphql-yoga';
 import { config } from 'dotenv';
-import axios from 'axios';
+import * as resolvers from './resolvers';
 
 config();
 
-const typeDefs = `
-  type Category {
-    id: ID!
-    name: String!
-    name_parameterized: String!
-  }
-
-  type Query {
-    categories: [Category!]!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    async categories() {
-      const { data } = await axios.get(
-        'https://api.texenergo.com/public/catalogues/'
-      );
-      return data;
-    },
-  },
-};
-
 const server = new GraphQLServer({
-  typeDefs,
+  typeDefs: './src/schema.graphql',
   resolvers,
 });
 

@@ -1,0 +1,10 @@
+type Category {
+  id: ID!
+  name: String!
+  name_parameterized: String!
+}
+
+type Query {
+  categories: [Category!]!
+
+}
