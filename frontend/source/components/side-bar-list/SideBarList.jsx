@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSpring, animated } from 'react-spring';
 
+import { NavLink } from 'react-router-dom';
+
 import { Icon } from '../icon/Icon';
 import minusIcon from '../../static/icons/minus.svg';
 import plusIcon from '../../static/icons/plus.svg';
@@ -32,9 +34,13 @@ export const SideBarList = ({ title, items }) => {
       <animated.ul className="list-wrapper" style={props}>
         {items.map((item) => (
           <li key={item.id} className="list-item">
-            <a href="/" className="list-item-link">
+            <NavLink
+              to={`/catalogues/${item.name_parameterized}`}
+              className="list-item-link"
+              activeClassName="active"
+            >
               {item.name}
-            </a>
+            </NavLink>
           </li>
         ))}
       </animated.ul>

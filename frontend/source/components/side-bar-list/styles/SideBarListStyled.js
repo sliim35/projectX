@@ -68,4 +68,14 @@ export const SideBarListStyled = styled.div`
       background-color: ${(props) => props.theme.hoverWhite};
     }
   }
+
+  .active {
+    background-color: ${(props) => props.theme.mainColor};
+    color: ${(props) => props.theme.titleColor};
+
+    &:hover {
+      background-color: ${(props) => props.theme.mainColor};
+      color: ${(props) => props.theme.titleColor};
+    }
+  }
 `;

@@ -5,6 +5,7 @@ export const CATALOGUES_QUERY = gql`
     categories {
       id
       name
+      name_parameterized
     }
   }
 `;

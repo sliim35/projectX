@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { SideBar } from '../../components/side-bar/SideBar';
 import { NavBar } from '../../components/nav-bar/NavBar';
@@ -25,25 +26,27 @@ const LogoWrapperStyled = styled.div`
 
 export const Body = () => {
   return (
-    <BodyStyled>
-      <SideBar>
-        <LogoWrapperStyled>
-          <Logo />
-        </LogoWrapperStyled>
-        <Query query={queries.CATALOGUES_QUERY}>
-          {({ loading, error, data }) => {
-            if (loading) return 'Loading...';
-            if (error) return `Error! ${error.message}`;
+    <Router>
+      <BodyStyled>
+        <SideBar>
+          <LogoWrapperStyled>
+            <Logo />
+          </LogoWrapperStyled>
+          <Query query={queries.CATALOGUES_QUERY}>
+            {({ loading, error, data }) => {
+              if (loading) return 'Loading...';
+              if (error) return `Error! ${error.message}`;
 
-            return <SideBarList title={title} items={data.categories} />;
-          }}
-        </Query>
-      </SideBar>
-      <NavBar>
-        <NavContainer />
-      </NavBar>
-      <Content />
-      <Footer items={footerItems} />
-    </BodyStyled>
+              return <SideBarList title={title} items={data.categories} />;
+            }}
+          </Query>
+        </SideBar>
+        <NavBar>
+          <NavContainer />
+        </NavBar>
+        <Content />
+        <Footer items={footerItems} />
+      </BodyStyled>
+    </Router>
   );
 };
