@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const NavSearchStyled = styled.div`
   position: relative;
   width: 100%;
+  border-bottom: 1px solid #eee;
   max-width: 500px;
 
   .search-input {

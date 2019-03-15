@@ -10,4 +10,5 @@ export const NavBarStyled = styled.nav`
   background-color: ${(props) => props.theme.navBarColor};
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   box-shadow: ${(props) => props.theme.navBarShadowColor};
+  z-index: ${(props) => props.theme.navBarZIndex};
 `;
