@@ -4,7 +4,37 @@ type Category {
   name_parameterized: String!
 }
 
+type Manufacturer {
+  id: ID!
+  name: String!
+  name_parameterized: String!
+}
+
+type Product {
+  id: ID!
+  article: String
+  name: String!
+  name_parameterized: String!
+  image_path: String
+  manufacturer_id: ID!
+  manufacturer: Manufacturer!
+  price: Float!
+  stock: Int!
+}
+
+type Pagination {
+  page: Int!
+  pagesTotal: Int!
+  productsTotal: Int!
+}
+
+type ProductsCategory {
+  category: Category!
+  products: [Product!]!
+  pagination: Pagination!
+}
+
 type Query {
   categories: [Category!]!
-
+  products_category(category_name: String!): ProductsCategory!
 }

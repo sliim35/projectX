@@ -1,21 +1,18 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { SideBar } from '../../components/side-bar/SideBar';
 import { NavBar } from '../../components/nav-bar/NavBar';
-import { Content } from '../content/Content';
 import { SideBarList } from '../../components/side-bar-list/SideBarList';
 import { Footer } from '../../components/footer/Footer';
 import { NavContainer } from '../nav-container/NavContainer';
 import { Logo } from '../../components/logo/Logo';
 
-import * as queries from '../../queries';
-
 import { BodyStyled } from './styles/BodyStyled';
 
-const title = 'Категории';
+import { Category } from '../../pages/category/Category';
+import { Home } from '../../pages/home/Home';
 
 const footerItems = ['Статьи', 'О компании', 'Контакты', 'Центр помощи'];
 
@@ -26,27 +23,25 @@ const LogoWrapperStyled = styled.div`
 
 export const Body = () => {
   return (
-    <Router>
-      <BodyStyled>
-        <SideBar>
-          <LogoWrapperStyled>
-            <Logo />
-          </LogoWrapperStyled>
-          <Query query={queries.CATALOGUES_QUERY}>
-            {({ loading, error, data }) => {
-              if (loading) return 'Loading...';
-              if (error) return `Error! ${error.message}`;
+    <BodyStyled>
+      <SideBar>
+        <LogoWrapperStyled>
+          <Logo />
+        </LogoWrapperStyled>
 
-              return <SideBarList title={title} items={data.categories} />;
-            }}
-          </Query>
-        </SideBar>
-        <NavBar>
-          <NavContainer />
-        </NavBar>
-        <Content />
-        <Footer items={footerItems} />
-      </BodyStyled>
-    </Router>
+        <SideBarList />
+      </SideBar>
+
+      <NavBar>
+        <NavContainer />
+      </NavBar>
+
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/catalogues/:category_name" component={Category} />
+      </Switch>
+
+      <Footer items={footerItems} />
+    </BodyStyled>
   );
 };
