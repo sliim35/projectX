@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 
 import { NavLink } from 'react-router-dom';
 
+import { Loader } from '../../components/loader/Loader';
 import { Icon } from '../icon/Icon';
 import minusIcon from '../../static/icons/minus.svg';
 import plusIcon from '../../static/icons/plus.svg';
@@ -25,7 +26,7 @@ export const SideBarList = () => {
     <>
       <Query query={queries.CATALOGUES_QUERY}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
+          if (loading) return null;
           if (error) return `Error! ${error.message}`;
 
           return (

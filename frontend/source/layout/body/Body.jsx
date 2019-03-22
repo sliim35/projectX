@@ -31,7 +31,6 @@ export const Body = () => {
 
         <SideBarList />
       </SideBar>
-
       <NavBar>
         <NavContainer />
       </NavBar>

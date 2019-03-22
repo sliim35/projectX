@@ -18,7 +18,7 @@ type Product {
   image_path: String
   manufacturer_id: ID!
   manufacturer: Manufacturer!
-  price: Float!
+  price: Float
   stock: Int!
 }
 
