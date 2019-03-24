@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const FooterStyled = styled.footer`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
   padding-left: 240px;
+  background-color: #fff;
+  z-index: ${(props) => props.theme.footerZIndex};
 
   .list-wrapper {
     font-size: inherit;

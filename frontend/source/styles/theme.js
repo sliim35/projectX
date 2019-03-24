@@ -15,4 +15,6 @@ export const theme = {
   textColor: '#676767',
   titleColor: '#444',
   navBarZIndex: 100,
+  footerZIndex: 100,
+  sideBarZIndex: 200,
 };

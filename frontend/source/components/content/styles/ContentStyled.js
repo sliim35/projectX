@@ -3,8 +3,9 @@ import { animated } from 'react-spring';
 
 export const ContentStyled = styled(animated.main)`
   position: relative;
-  padding: 72px 32px 46px;
+  padding: 64px 0 46px;
   width: 100%;
-  height: 100vh;
   opacity: 0;
+  display: flex;
+  justify-content: center;
 `;

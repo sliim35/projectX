@@ -5,14 +5,13 @@ import styled from 'styled-components';
 const ProductGridStyled = styled.div`
   display: flex;
   width: 100%;
-
-  div {
-    max-width: 100px;
-  }
+  flex-wrap: wrap;
+  background-color: #fff;
+  align-items: center;
+  padding: 48px 0;
 `;
 
 export const ProductsGrid = (props) => {
-  console.log(props);
   const { children } = props;
 
   return <ProductGridStyled>{children}</ProductGridStyled>;

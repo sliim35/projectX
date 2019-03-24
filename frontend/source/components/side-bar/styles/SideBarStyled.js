@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SideBarStyled = styled.nav`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
@@ -11,4 +11,5 @@ export const SideBarStyled = styled.nav`
   text-align: left;
   background-color: ${(props) => props.theme.sideBarColor};
   border-right: 1px solid ${(props) => props.theme.borderColor};
+  z-index: ${(props) => props.theme.sideBarZIndex};
 `;
