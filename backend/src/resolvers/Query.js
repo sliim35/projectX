@@ -8,10 +8,10 @@ export const Query = {
     return data;
   },
   async products_category(parent, args) {
-    console.log('args:', args);
     const { data } = await axios.get(
       `https://api.texenergo.com/public/catalogues/${args.category_name}`
     );
+    console.log(data);
     return data;
   },
 };

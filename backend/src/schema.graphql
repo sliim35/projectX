@@ -29,7 +29,9 @@ type Pagination {
 }
 
 type ProductsCategory {
-  category: Category!
+  id: ID!
+  name: String!
+  name_parameterized: String!
   products: [Product!]!
   pagination: Pagination!
 }

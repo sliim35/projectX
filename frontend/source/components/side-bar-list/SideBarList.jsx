@@ -4,7 +4,6 @@ import { Query } from 'react-apollo';
 
 import { NavLink } from 'react-router-dom';
 
-import { Loader } from '../../components/loader/Loader';
 import { Icon } from '../icon/Icon';
 import minusIcon from '../../static/icons/minus.svg';
 import plusIcon from '../../static/icons/plus.svg';

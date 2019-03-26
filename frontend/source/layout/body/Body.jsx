@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { SideBar } from '../../components/side-bar/SideBar';
@@ -8,11 +8,9 @@ import { SideBarList } from '../../components/side-bar-list/SideBarList';
 import { Footer } from '../../components/footer/Footer';
 import { NavContainer } from '../nav-container/NavContainer';
 import { Logo } from '../../components/logo/Logo';
+import { Routes } from '../../pages/Routes';
 
 import { BodyStyled } from './styles/BodyStyled';
-
-import { Category } from '../../pages/category/Category';
-import { Home } from '../../pages/home/Home';
 
 const footerItems = ['Статьи', 'О компании', 'Контакты', 'Центр помощи'];
 
@@ -23,24 +21,20 @@ const LogoWrapperStyled = styled.div`
 
 export const Body = () => {
   return (
-    <BodyStyled>
-      <SideBar>
-        <LogoWrapperStyled>
-          <Logo />
-        </LogoWrapperStyled>
-
-        <SideBarList />
-      </SideBar>
-      <NavBar>
-        <NavContainer />
-      </NavBar>
-
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/catalogues/:category_name" component={Category} />
-      </Switch>
-
-      <Footer items={footerItems} />
-    </BodyStyled>
+    <Router>
+      <BodyStyled>
+        <SideBar>
+          <LogoWrapperStyled>
+            <Logo />
+          </LogoWrapperStyled>
+          <SideBarList />
+        </SideBar>
+        <NavBar>
+          <NavContainer />
+        </NavBar>
+        <Routes />
+        <Footer items={footerItems} />
+      </BodyStyled>
+    </Router>
   );
 };

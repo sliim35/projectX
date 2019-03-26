@@ -6,6 +6,7 @@ import { Content } from '../../components/content/Content';
 import { Loader } from '../../components/loader/Loader';
 import { ProductsGrid } from '../../components/products-grid/ProductsGrid';
 import { Products } from '../../components/products/Products';
+import { LeadTitle } from '../../components/lead-title/LeadTitle';
 
 import * as queries from '../../queries';
 
@@ -23,9 +24,12 @@ export const Category = (props) => {
           if (error) return `Error! ${error.message}`;
 
           return (
-            <ProductsGrid>
-              <Products data={data} />
-            </ProductsGrid>
+            <>
+              <LeadTitle>{data.products_category.name}</LeadTitle>
+              <ProductsGrid>
+                <Products data={data} />
+              </ProductsGrid>
+            </>
           );
         }}
       </Query>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const IconStyled = styled.svg`
-  position: absolute;
+  position: ${(props) => props.position};
   top: ${(props) => props.top}%;
   margin-left: ${(props) => props.ml}px;
   transform: translateY(-50%);
@@ -15,7 +15,7 @@ const IconStyled = styled.svg`
 `;
 
 export const Icon = (props) => {
-  const { glyph, viewBox, width, height, top, ml } = props;
+  const { glyph, viewBox, width, height, top, ml, position } = props;
 
   return (
     <IconStyled
@@ -24,6 +24,7 @@ export const Icon = (props) => {
       top={top}
       viewBox={viewBox}
       ml={ml}
+      position={position}
     >
       <use xlinkHref={`#${glyph}`} />
     </IconStyled>
@@ -39,6 +40,7 @@ Icon.propTypes = {
   height: PropTypes.string,
   top: PropTypes.string,
   ml: PropTypes.string,
+  position: PropTypes.string,
 };
 
 Icon.defaultProps = {
@@ -46,4 +48,5 @@ Icon.defaultProps = {
   height: '24',
   top: '48',
   ml: '32',
+  position: 'absolute',
 };

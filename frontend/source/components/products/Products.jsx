@@ -12,7 +12,7 @@ export const Products = (props) => {
     },
   } = props;
 
-  console.log('products:', products);
+  console.log('props.data:', props.data);
 
   return (
     <>

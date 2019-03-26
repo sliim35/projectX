@@ -68,7 +68,7 @@ module.exports = {
         collapseWhitespace: !isDebug,
       },
       cache: false, // Emit the file only if it was changed
-      title: 'Электрооборудование в 2 клика',
+      title: 'Электрооборудование в один клик',
     }),
 
     ...(isAnalyse ? [new BundleAnalyzerPlugin()] : []),
