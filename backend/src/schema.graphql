@@ -2,6 +2,13 @@ type Category {
   id: ID!
   name: String!
   name_parameterized: String!
+  children: [SubCategory]!
+}
+
+type SubCategory {
+  id: ID!
+  name: String!
+  name_parameterized: String!
 }
 
 type Manufacturer {
@@ -34,9 +41,10 @@ type ProductsCategory {
   name_parameterized: String!
   products: [Product!]!
   pagination: Pagination!
+  children: [SubCategory]!
 }
 
 type Query {
   categories: [Category!]!
-  products_category(category_name: String!): ProductsCategory!
+  products_category(category_name: String! page: Int): ProductsCategory!
 }
