@@ -43,6 +43,7 @@ const ProductWrapperStyled = styled.div`
     align-self: center;
     overflow: hidden;
     margin-bottom: 1rem;
+    flex-grow: 1;
   }
 
   .content {
@@ -120,17 +121,21 @@ export const Product = (props) => {
   return (
     <ProductWrapperStyled>
       <div className="image">
-        <img
-          src={`${TEXENERGO_CDN}/${product.image_path}`}
-          alt={product.name}
-        />
+        {product.image_path ? (
+          <img
+            src={`${TEXENERGO_CDN}/${product.image_path}`}
+            alt={product.name}
+          />
+        ) : (
+          <span>Изображение временно отсутствует</span>
+        )}
       </div>
       <div className="content">
         <div className="title">{product.name}</div>
         <div className="price">
           {product.price && product.price !== 0 ? (
             <>
-              {product.price}
+              {parseFloat(product.price).toFixed(2)}
               <Icon
                 glyph={rubleIcon.id}
                 viewBox={rubleIcon.viewBox}

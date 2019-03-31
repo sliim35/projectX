@@ -17,9 +17,9 @@ export const Category = (props) => {
     <Content>
       <Query
         query={queries.PRODUCTS_CATEGORY_QUERY}
-        variables={{ category_name }}
+        variables={{ category_name, page: 1 }}
       >
-        {({ loading, error, data }) => {
+        {({ loading, error, data, fetchMore }) => {
           if (loading) return <Loader />;
           if (error) return `Error! ${error.message}`;
 
@@ -27,7 +27,30 @@ export const Category = (props) => {
             <>
               <LeadTitle>{data.products_category.name}</LeadTitle>
               <ProductsGrid>
-                <Products data={data} />
+                <Products
+                  pagination={data.products_category.pagination}
+                  onLoadMore={(newPage) => {
+                    fetchMore({
+                      variables: {
+                        category_name,
+                        page: newPage,
+                      },
+                      updateQuery: (previousResult, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return previousResult;
+                        return {
+                          products_category: {
+                            ...fetchMoreResult.products_category,
+                            products: [
+                              ...previousResult.products_category.products,
+                              ...fetchMoreResult.products_category.products,
+                            ],
+                          },
+                        };
+                      },
+                    });
+                  }}
+                  data={data}
+                />
               </ProductsGrid>
             </>
           );

@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+
+import { Waypoint } from 'react-waypoint';
 
 import { Product } from '../../components/product/Product';
 
-import { ProductsType } from '../../types';
+import { ProductsType, PaginationType } from '../../types';
 
 export const Products = (props) => {
   const {
     data: {
       products_category: { products },
     },
+    onLoadMore,
+    pagination,
   } = props;
-
-  console.log('props.data:', props.data);
 
   return (
     <>
-      {products.map((product) => (
-        <Product key={product.id} product={product} />
+      {products.map((product, index) => (
+        <Fragment key={product.id}>
+          <Product product={product} />
+          {index === products.length - 1 && (
+            <Waypoint
+              onEnter={() => {
+                if (pagination.page >= pagination.pagesTotal) return null;
+                const newPage = pagination.page + 1;
+                onLoadMore(newPage);
+              }}
+            />
+          )}
+        </Fragment>
       ))}
     </>
   );
@@ -29,4 +42,6 @@ Products.propTypes = {
       products: ProductsType.isRequired,
     }),
   }),
+  onLoadMore: PropTypes.func.isRequired,
+  pagination: PaginationType.isRequired,
 };

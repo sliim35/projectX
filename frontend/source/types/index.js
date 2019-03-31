@@ -8,4 +8,10 @@ export const ProductType = PropTypes.shape({
   stock: PropTypes.number,
 });
 
+export const PaginationType = PropTypes.shape({
+  page: PropTypes.number,
+  pagesTotal: PropTypes.number,
+  productsTotal: PropTypes.number,
+});
+
 export const ProductsType = PropTypes.arrayOf(ProductType);
