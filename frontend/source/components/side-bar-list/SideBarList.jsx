@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Query } from 'react-apollo';
 
-import { NavLink } from 'react-router-dom';
-
+import { Category } from '../category/Category';
 import { Icon } from '../icon/Icon';
 import minusIcon from '../../static/icons/minus.svg';
 import plusIcon from '../../static/icons/plus.svg';
@@ -47,15 +46,7 @@ export const SideBarList = () => {
               </button>
               <animated.ul className="list-wrapper" style={props}>
                 {data.categories.map((item) => (
-                  <li key={item.id} className="list-item">
-                    <NavLink
-                      to={`/catalogues/${item.name_parameterized}`}
-                      className="list-item-link"
-                      activeClassName="active"
-                    >
-                      {item.name}
-                    </NavLink>
-                  </li>
+                  <Category key={item.id} data={item} />
                 ))}
               </animated.ul>
             </SideBarListStyled>

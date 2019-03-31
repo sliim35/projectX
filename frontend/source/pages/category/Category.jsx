@@ -11,13 +11,14 @@ import { LeadTitle } from '../../components/lead-title/LeadTitle';
 import * as queries from '../../queries';
 
 export const Category = (props) => {
-  const { category_name } = props.match.params;
+  const { category_name, sub_category_name } = props.match.params;
+  const category = sub_category_name || category_name;
 
   return (
     <Content>
       <Query
         query={queries.PRODUCTS_CATEGORY_QUERY}
-        variables={{ category_name, page: 1 }}
+        variables={{ category_name: category, page: 1 }}
       >
         {({ loading, error, data, fetchMore }) => {
           if (loading) return <Loader />;
@@ -32,7 +33,7 @@ export const Category = (props) => {
                   onLoadMore={(newPage) => {
                     fetchMore({
                       variables: {
-                        category_name,
+                        category_name: category,
                         page: newPage,
                       },
                       updateQuery: (previousResult, { fetchMoreResult }) => {
@@ -64,6 +65,7 @@ Category.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       category_name: PropTypes.string.isRequired,
+      sub_category_name: PropTypes.string,
     }),
   }),
 };

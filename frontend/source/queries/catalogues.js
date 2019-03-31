@@ -6,6 +6,11 @@ export const CATALOGUES_QUERY = gql`
       id
       name
       name_parameterized
+      children {
+        id
+        name
+        name_parameterized
+      }
     }
   }
 `;

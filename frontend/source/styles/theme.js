@@ -24,4 +24,5 @@ export const theme = {
   navBarZIndex: 100,
   footerZIndex: 100,
   sideBarZIndex: 200,
+  subCategoryZIndex: 202,
 };

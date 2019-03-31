@@ -9,6 +9,10 @@ export const Routes = () => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/catalogues/:category_name" component={Category} />
+      <Route
+        path="/catalogues/:category_name/:sub_category_name"
+        component={Category}
+      />
     </Switch>
   );
 };
