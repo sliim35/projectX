@@ -1,13 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
 import { Waypoint } from 'react-waypoint';
+
+import ProductsContext from '../../store';
+import { GET_PRODUCTS } from '../../store/constants';
 
 import { Product } from '../../components/product/Product';
 
 import { ProductsType, PaginationType } from '../../types';
 
 export const Products = (props) => {
+  const { dispatch } = useContext(ProductsContext);
   const {
     data: {
       products_category: { products },
@@ -15,6 +18,10 @@ export const Products = (props) => {
     onLoadMore,
     pagination,
   } = props;
+
+  useEffect(() => {
+    dispatch({ type: GET_PRODUCTS, payload: products });
+  }, [products]);
 
   return (
     <>
