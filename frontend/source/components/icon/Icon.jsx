@@ -12,10 +12,21 @@ const IconStyled = styled.svg`
   height: ${(props) => props.height || 24}px;
   fill: ${(props) => props.theme.textColor};
   z-index: ${(props) => props.theme.navBarZIndex + 1};
+  animation: ${(props) => props.isSpinner && `rotate 2s linear infinite`};
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 export const Icon = (props) => {
-  const { glyph, viewBox, width, height, top, ml, position } = props;
+  const { glyph, viewBox, width, height, top, ml, position, isSpinner } = props;
 
   return (
     <IconStyled
@@ -25,6 +36,7 @@ export const Icon = (props) => {
       viewBox={viewBox}
       ml={ml}
       position={position}
+      isSpinner={isSpinner}
     >
       <use xlinkHref={`#${glyph}`} />
     </IconStyled>
@@ -41,6 +53,7 @@ Icon.propTypes = {
   top: PropTypes.string,
   ml: PropTypes.string,
   position: PropTypes.string,
+  isSpinner: PropTypes.bool,
 };
 
 Icon.defaultProps = {
@@ -49,4 +62,5 @@ Icon.defaultProps = {
   top: '48',
   ml: '32',
   position: 'absolute',
+  isSpinner: false,
 };

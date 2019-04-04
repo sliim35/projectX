@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext, useReducer } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
+
+import ProductsContext from '../../store';
+import * as reducers from '../../store/reducers';
 
 import { SideBar } from '../../components/side-bar/SideBar';
 import { NavBar } from '../../components/nav-bar/NavBar';
@@ -20,21 +23,26 @@ const LogoWrapperStyled = styled.div`
 `;
 
 export const Body = () => {
+  const initialState = useContext(ProductsContext);
+  const [state, dispatch] = useReducer(reducers.productsReducer, initialState);
+
   return (
-    <Router>
-      <BodyStyled>
-        <SideBar>
-          <LogoWrapperStyled>
-            <Logo />
-          </LogoWrapperStyled>
-          <SideBarList />
-        </SideBar>
-        <NavBar>
-          <NavContainer />
-        </NavBar>
-        <Routes />
-        <Footer items={footerItems} />
-      </BodyStyled>
-    </Router>
+    <ProductsContext.Provider value={{ state, dispatch }}>
+      <Router>
+        <BodyStyled>
+          <SideBar>
+            <LogoWrapperStyled>
+              <Logo />
+            </LogoWrapperStyled>
+            <SideBarList />
+          </SideBar>
+          <NavBar>
+            <NavContainer />
+          </NavBar>
+          <Routes />
+          <Footer items={footerItems} />
+        </BodyStyled>
+      </Router>
+    </ProductsContext.Provider>
   );
 };

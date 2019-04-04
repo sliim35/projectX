@@ -23,7 +23,7 @@ type Product {
   name: String!
   name_parameterized: String!
   image_path: String
-  manufacturer_id: ID!
+  manufacturer_id: ID
   manufacturer: Manufacturer!
   price: Float
   stock: Int!
@@ -47,4 +47,5 @@ type ProductsCategory {
 type Query {
   categories: [Category!]!
   products_category(category_name: String! page: Int): ProductsCategory!
+  products(query: String): [Product]!
 }

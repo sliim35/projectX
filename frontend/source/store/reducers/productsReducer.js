@@ -1,4 +1,4 @@
-import { GET_PRODUCTS } from '../constants';
+import { GET_PRODUCTS, SEARCH_QUERY } from '../constants';
 
 export function productsReducer(state, action) {
   switch (action.type) {
@@ -7,6 +7,13 @@ export function productsReducer(state, action) {
         ...state,
         products: action.payload,
       };
+
+    case SEARCH_QUERY:
+      return {
+        ...state,
+        query: action.payload,
+      };
+
     default:
       return state;
   }

@@ -24,4 +24,15 @@ export const Query = {
 
     return data;
   },
+  async products(parent, args) {
+    if (args.query) {
+      const query = encodeURIComponent(args.query.toLowerCase());
+      const { data } = await axios.get(
+        `https://api.texenergo.com/public/search?q=${query}`
+      );
+
+      return data;
+    }
+    return [];
+  },
 };
