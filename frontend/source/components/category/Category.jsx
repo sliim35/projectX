@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSpring } from 'react-spring';
 import { NavLink } from 'react-router-dom';
@@ -65,7 +66,7 @@ export const Category = (props) => {
         onMouseEnter={() => {
           setHover(true);
         }}
-        onMouseLeave={(e) => {
+        onMouseLeave={() => {
           setHover(false);
         }}
       >
@@ -89,4 +90,8 @@ export const Category = (props) => {
       </CategoryStyled>
     </>
   );
+};
+
+Category.propTypes = {
+  data: PropTypes.object.isRequired,
 };

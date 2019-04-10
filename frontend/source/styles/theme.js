@@ -13,6 +13,7 @@ export const theme = {
   bodyBackgroundColor: white,
   navBarColor: white,
   navBarShadowColor: '1px 2px 4px 0 rgba(0,0,0,.03)',
+  searchResultBarShadow: '1px 4px 8px 0 rgba(0,0,0,.15)',
   borderColor: lightGrey,
   sideBarColor: '#f8f8fa',
   textColor: '#676767',
@@ -24,5 +25,7 @@ export const theme = {
   navBarZIndex: 100,
   footerZIndex: 100,
   sideBarZIndex: 200,
-  subCategoryZIndex: 202,
+  subCategoryZIndex: 301,
+  searchResultBarZIndex: 101,
+  overlayZIndex: 99,
 };

@@ -1,6 +1,7 @@
-import React, { useContext, useReducer } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring';
 
 import ProductsContext from '../../store';
 import * as reducers from '../../store/reducers';
@@ -10,6 +11,9 @@ import { NavBar } from '../../components/nav-bar/NavBar';
 import { SideBarList } from '../../components/side-bar-list/SideBarList';
 import { Footer } from '../../components/footer/Footer';
 import { NavContainer } from '../nav-container/NavContainer';
+import { Overlay } from '../../components/overlay/Overlay';
+import { SearchResultBar } from '../../components/search-result-bar/SearchResultBar';
+import { SearchResultList } from '../../components/search-result-list/SearchResultList';
 import { Logo } from '../../components/logo/Logo';
 import { Routes } from '../../pages/Routes';
 
@@ -22,9 +26,23 @@ const LogoWrapperStyled = styled.div`
   padding: 12px 16px;
 `;
 
+const SearchResultBarContainer = styled(animated.div)`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: ${(props) => props.theme.searchResultBarZIndex};
+`;
+
 export const Body = () => {
+  const [isSearching, setSearching] = useState(false);
   const initialState = useContext(ProductsContext);
   const [state, dispatch] = useReducer(reducers.productsReducer, initialState);
+  const animated = useSpring({
+    opacity: `${isSearching ? 1 : 0}`,
+    transform: `translate3d(${
+      isSearching ? '0, 54px, 0px' : '0px, 32px, 0px'
+    })`,
+  });
 
   return (
     <ProductsContext.Provider value={{ state, dispatch }}>
@@ -37,8 +55,16 @@ export const Body = () => {
             <SideBarList />
           </SideBar>
           <NavBar>
-            <NavContainer />
+            <NavContainer setSearching={setSearching} />
           </NavBar>
+
+          <SearchResultBarContainer style={animated}>
+            <SearchResultBar>
+              <SearchResultList />
+            </SearchResultBar>
+          </SearchResultBarContainer>
+          {isSearching && <Overlay />}
+
           <Routes />
           <Footer items={footerItems} />
         </BodyStyled>

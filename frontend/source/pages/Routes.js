@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { Home } from './home/Home';
 import { Category } from './category/Category';
+import { ProductView } from './product-view/ProductView';
 
 export const Routes = () => {
   return (
@@ -13,6 +14,7 @@ export const Routes = () => {
         path="/catalogues/:category_name/:sub_category_name"
         component={Category}
       />
+      <Route exact path="/products/:product_id" component={ProductView} />
     </Switch>
   );
 };

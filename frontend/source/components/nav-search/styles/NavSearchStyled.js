@@ -3,18 +3,25 @@ import styled from 'styled-components';
 export const NavSearchStyled = styled.div`
   position: relative;
   width: 100%;
-  border-bottom: 1px solid #eee;
   max-width: 500px;
+  height: 64px;
 
   .search-input {
     font-size: 1rem;
     color: ${(props) => props.theme.textColor};
-    height: 64px;
-    border: none;
-    padding-left: 56px;
+    border: 1px solid transparent;
+    margin-left: 16px;
     width: 100%;
     max-width: 500px;
     font-weight: 400;
+    padding: 8px 16px;
+    padding-left: 42px;
+    margin-top: 15px;
+
+    &:focus {
+      border-radius: 4px;
+      border: 1px solid #dfe1e5;
+    }
   }
 
   .label {

@@ -7,7 +7,8 @@
     "clear": "rimraf ./public/",
     "debug": "npm run clear && babel-node tools/run build -- --debug",
     "build": " npm run clear && babel-node tools/run build",
-    "start": "babel-node tools/server -- --debug"
+    "start": "babel-node tools/server -- --debug",
+    "lint": "eslint ./source"
   },
   "author": "",
   "license": "ISC",

@@ -18,7 +18,7 @@ const ProductWrapperStyled = styled.div`
   background-color: #fff;
   box-shadow: 0 2px 4px 0 #eee;
   border: 1px solid #eee;
-  border-radius: 4px;
+  border-radius: 8px;
   height: 400px;
   cursor: pointer;
   margin: 8px 16px 8px 0;

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import ProductsContext from '../../store';
 import { client } from '../../../tools/graphqlClient';
@@ -11,10 +12,11 @@ import { Icon } from '../../components/icon/Icon';
 
 import { NavSearchStyled } from './styles/NavSearchStyled';
 
-export const NavSearch = () => {
+export const NavSearch = (props) => {
   const [value, setValue] = useState('');
   const [isLoading, setLoading] = useState(false);
   const { dispatch } = useContext(ProductsContext);
+  const { setSearching } = props;
 
   const getProducts = async () => {
     setLoading(true);
@@ -24,17 +26,18 @@ export const NavSearch = () => {
         query: value || undefined,
       },
     });
+
     if (data) {
+      const { products } = data;
       setLoading(false);
-      return data;
+      dispatch({ type: GET_PRODUCTS, payload: products });
     }
   };
 
   useEffect(() => {
     dispatch({ type: SEARCH_QUERY, payload: value });
     if (value) {
-      const data = getProducts();
-      dispatch({ type: GET_PRODUCTS, payload: data });
+      getProducts();
     }
   }, [value]);
 
@@ -66,9 +69,19 @@ export const NavSearch = () => {
         className="search-input"
         placeholder="Поиск по артикулу или названию"
         autoComplete="off"
+        onClick={() => setSearching(true)}
+        onBlur={() => setSearching(false)}
         onChange={(e) => setValue(e.target.value)}
         value={value}
       />
     </NavSearchStyled>
   );
+};
+
+NavSearch.propTypes = {
+  setSearching: PropTypes.func,
+};
+
+NavSearch.defaultProps = {
+  setSearching: () => null,
 };
