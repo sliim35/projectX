@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Home } from './home/Home';
 import { Category } from './category/Category';
 import { ProductView } from './product-view/ProductView';
+import { Cart } from './cart/Cart';
 
 export const Routes = () => {
   return (
@@ -15,6 +16,7 @@ export const Routes = () => {
         component={Category}
       />
       <Route exact path="/products/:product_id" component={ProductView} />
+      <Route exact path="/cart" component={Cart} />
     </Switch>
   );
 };

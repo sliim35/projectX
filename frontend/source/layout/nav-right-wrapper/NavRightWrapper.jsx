@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { CartContext } from '../../store/contexts/CartContext';
 import shoppingCartIcon from '../../static/icons/shopping-cart.svg';
@@ -10,9 +11,16 @@ const NavRightWrapperStyled = styled.button`
   position: relative;
   display: flex;
   padding-right: 32px;
+  cursor: pointer;
+
+  svg {
+    transition-duration: 400ms;
+  }
 
   &:hover {
-    cursor: pointer;
+    svg {
+      fill: ${(props) => props.theme.mainColor};
+    }
   }
 
   .quantity {
@@ -37,21 +45,28 @@ const CartTextStyled = styled.span`
   line-height: 64px;
 `;
 
+const LinkStyled = styled(Link)`
+  cursor: pointer;
+`;
+
 export const NavRightWrapper = () => {
   const { cartState } = useContext(CartContext);
   const { cart } = cartState;
+
   return (
-    <NavRightWrapperStyled>
-      <div className="cart-icon-wrapper">
-        <Icon
-          glyph={shoppingCartIcon.id}
-          viewBox={shoppingCartIcon.viewBox}
-          width="24"
-          height="24"
-        />
-        <span className="quantity">{'2'}</span>
-      </div>
-      <CartTextStyled>Корзина</CartTextStyled>
-    </NavRightWrapperStyled>
+    <LinkStyled to="/cart">
+      <NavRightWrapperStyled onClick={() => console.log(123)}>
+        <div className="cart-icon-wrapper">
+          <Icon
+            glyph={shoppingCartIcon.id}
+            viewBox={shoppingCartIcon.viewBox}
+            width="24"
+            height="24"
+          />
+          {cart.length > 0 && <span className="quantity">{cart.length}</span>}
+        </div>
+        <CartTextStyled>Корзина</CartTextStyled>
+      </NavRightWrapperStyled>
+    </LinkStyled>
   );
 };

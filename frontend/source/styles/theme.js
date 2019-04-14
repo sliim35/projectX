@@ -5,7 +5,7 @@ const yellow = '#feb818';
 const darkYellow = '#ffa532';
 const blue = '#0069ff';
 const deepBlue = '#005fe6';
-const green = '#66BB6A';
+const green = '#4CAF50';
 
 export const theme = {
   hoverWhite: white,

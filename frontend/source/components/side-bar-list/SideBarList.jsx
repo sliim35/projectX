@@ -24,7 +24,7 @@ export const SideBarList = () => {
     <>
       <Query query={queries.CATALOGUES_QUERY}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
+          if (loading) return 'Категории загружаются...';
           if (error) return `Error! ${error.message}`;
 
           return (
