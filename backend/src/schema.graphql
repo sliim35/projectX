@@ -48,4 +48,5 @@ type Query {
   categories: [Category!]!
   products_category(category_name: String! page: Int): ProductsCategory!
   products(query: String): [Product]!
+  product(product_id: String!): Product!
 }

@@ -15,7 +15,7 @@ import { NavSearchStyled } from './styles/NavSearchStyled';
 export const NavSearch = (props) => {
   const [value, setValue] = useState('');
   const [isLoading, setLoading] = useState(false);
-  const { dispatch } = useContext(ProductsContext);
+  const { productsDispatch } = useContext(ProductsContext);
   const { setSearching } = props;
 
   const getProducts = async () => {
@@ -30,12 +30,12 @@ export const NavSearch = (props) => {
     if (data) {
       const { products } = data;
       setLoading(false);
-      dispatch({ type: GET_PRODUCTS, payload: products });
+      productsDispatch({ type: GET_PRODUCTS, payload: products });
     }
   };
 
   useEffect(() => {
-    dispatch({ type: SEARCH_QUERY, payload: value });
+    productsDispatch({ type: SEARCH_QUERY, payload: value });
     if (value) {
       getProducts();
     }

@@ -4,7 +4,8 @@ const black = 'rgba(0,0,0, .56)';
 const yellow = '#feb818';
 const darkYellow = '#ffa532';
 const blue = '#0069ff';
-const deepBlue = '005fe6';
+const deepBlue = '#005fe6';
+const green = '#66BB6A';
 
 export const theme = {
   hoverWhite: white,
@@ -28,4 +29,7 @@ export const theme = {
   subCategoryZIndex: 301,
   searchResultBarZIndex: 101,
   overlayZIndex: 99,
+  quantityZIndex: 102,
+  quantityColor: green,
+  whiteColor: white,
 };

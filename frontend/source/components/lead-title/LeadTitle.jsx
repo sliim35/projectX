@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledLeadTitle = styled.h1`
   font-size: 2.25rem;
-  line-height: 1.5rem;
+  line-height: 3rem;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
   font-weight: 400;

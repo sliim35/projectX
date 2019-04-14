@@ -10,7 +10,7 @@ import { Product } from '../../components/product/Product';
 import { ProductsType, PaginationType } from '../../types';
 
 export const Products = (props) => {
-  const { dispatch } = useContext(ProductsContext);
+  const { productsDispatch } = useContext(ProductsContext);
   const {
     data: {
       products_category: { products },
@@ -20,7 +20,7 @@ export const Products = (props) => {
   } = props;
 
   useEffect(() => {
-    dispatch({ type: GET_PRODUCTS, payload: products });
+    productsDispatch({ type: GET_PRODUCTS, payload: products });
   }, [products]);
 
   return (

@@ -7,6 +7,7 @@ export const Query = {
     );
     return data;
   },
+
   async products_category(parent, args) {
     if (args.page) {
       const { data } = await axios.get(
@@ -24,6 +25,7 @@ export const Query = {
 
     return data;
   },
+
   async products(parent, args) {
     if (args.query) {
       const query = encodeURIComponent(args.query.toLowerCase());
@@ -35,4 +37,12 @@ export const Query = {
     }
     return [];
   },
+
+  async product(parent, args) {
+    const { data } = await axios.get(
+      `https://api.texenergo.com/public/products/${args.product_id}`
+    );
+
+    return data;
+  }
 };

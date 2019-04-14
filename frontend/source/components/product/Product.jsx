@@ -149,7 +149,7 @@ export const Product = (props) => {
       </div>
 
       <StyledLink
-        to="/product"
+        to={`/products/${product.id}`}
         disabled={Boolean(product.stock === 0 || !product.stock)}
       >
         {`${product.stock ? 'Купить' : 'Нет в наличии'}`}

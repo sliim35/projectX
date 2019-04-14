@@ -30,8 +30,8 @@ const SearchResultListStyled = styled.ul`
 `;
 
 export const SearchResultList = () => {
-  const { state } = useContext(ProductsContext);
-  const { products, query } = state;
+  const { productsState } = useContext(ProductsContext);
+  const { products, query } = productsState;
   const regexp = new RegExp(query, 'gi');
 
   return (
@@ -43,7 +43,7 @@ export const SearchResultList = () => {
             .toLowerCase();
 
           return (
-            <Link key={product.id} to="/">
+            <Link key={product.id} to={`/products/${product.id}`}>
               <li
                 dangerouslySetInnerHTML={{
                   __html: ` ${name}`,
