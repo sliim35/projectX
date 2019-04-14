@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import { CartContext } from '../../store/contexts/CartContext';
+import { client } from '../../../tools/graphqlClient';
+import { CREATE_REQUEST_MUTATION } from '../../queries/createRequest';
 
 import { Container } from '../../components/container/Container';
 import { Content } from '../../components/content/Content';
@@ -107,12 +109,26 @@ const OrderButtonStyled = styled.button`
 `;
 
 export const Cart = () => {
+  const [successMessage, setSuccesMessage] = useState(false);
   const { cartState } = useContext(CartContext);
   const { cart } = cartState;
-  console.log(cart);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  async function sendRequest() {
+    const { data } = await client.mutate({
+      mutation: CREATE_REQUEST_MUTATION,
+      variables: {
+        products: cart.map((product) => ({
+          name: product.name,
+          quantity: product.quantity,
+        })),
+      },
+    });
+
+    return data.create_request.msg;
   }
 
   return (
@@ -176,9 +192,18 @@ export const Cart = () => {
                   />
                 </span>
               </div>
-              <form name="order">
+              <form
+                name="order"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const msg = await sendRequest();
+                  if (msg === 'Заявка отправлена') setSuccesMessage(true);
+                }}
+              >
                 <OrderButtonStyled type="submit">
-                  Оформить заказ
+                  {successMessage
+                    ? 'Заявка успешно отправлена'
+                    : 'Оформить заказ'}
                 </OrderButtonStyled>
               </form>
             </>

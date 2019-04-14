@@ -31,5 +31,6 @@ export const theme = {
   overlayZIndex: 99,
   quantityZIndex: 102,
   quantityColor: green,
+  successColor: green,
   whiteColor: white,
 };

@@ -55,7 +55,7 @@ export const NavRightWrapper = () => {
 
   return (
     <LinkStyled to="/cart">
-      <NavRightWrapperStyled onClick={() => console.log(123)}>
+      <NavRightWrapperStyled>
         <div className="cart-icon-wrapper">
           <Icon
             glyph={shoppingCartIcon.id}

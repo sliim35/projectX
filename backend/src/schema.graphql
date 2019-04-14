@@ -44,9 +44,22 @@ type ProductsCategory {
   children: [SubCategory]!
 }
 
+type Message {
+  msg: String!
+}
+
+input createRequestInput {
+  name: String!
+  quantity: String!
+}
+
 type Query {
   categories: [Category!]!
   products_category(category_name: String! page: Int): ProductsCategory!
   products(query: String): [Product]!
   product(product_id: String!): Product!
+}
+
+type Mutation {
+  create_request(products: [createRequestInput]!): Message!
 }
