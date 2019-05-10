@@ -7,7 +7,7 @@ const IconStyled = styled.svg`
   position: ${(props) => props.position};
   top: ${(props) => props.top}%;
   margin-left: ${(props) => props.ml}px;
-  transform: translateY(-50%);
+  transform: translateY(${(props) => props.coordY}%);
   width: ${(props) => props.width || 24}px;
   height: ${(props) => props.height || 24}px;
   fill: ${(props) => props.theme.textColor};
@@ -26,7 +26,17 @@ const IconStyled = styled.svg`
 `;
 
 export const Icon = (props) => {
-  const { glyph, viewBox, width, height, top, ml, position, isSpinner } = props;
+  const {
+    glyph,
+    viewBox,
+    width,
+    height,
+    top,
+    ml,
+    position,
+    isSpinner,
+    coordY,
+  } = props;
 
   return (
     <IconStyled
@@ -37,6 +47,7 @@ export const Icon = (props) => {
       ml={ml}
       position={position}
       isSpinner={isSpinner}
+      coordY={coordY}
     >
       <use xlinkHref={`#${glyph}`} />
     </IconStyled>
@@ -54,6 +65,7 @@ Icon.propTypes = {
   ml: PropTypes.string,
   position: PropTypes.string,
   isSpinner: PropTypes.bool,
+  coordY: PropTypes.string,
 };
 
 Icon.defaultProps = {
@@ -63,4 +75,5 @@ Icon.defaultProps = {
   ml: '32',
   position: 'absolute',
   isSpinner: false,
+  coordY: '-50',
 };

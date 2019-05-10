@@ -6,6 +6,7 @@ import { CartContext } from '../../store/contexts/CartContext';
 import shoppingCartIcon from '../../static/icons/shopping-cart.svg';
 
 import { Icon } from '../../components/icon/Icon';
+import { Counter } from '../../components/counter/Counter';
 
 const NavRightWrapperStyled = styled.button`
   position: relative;
@@ -21,22 +22,6 @@ const NavRightWrapperStyled = styled.button`
     svg {
       fill: ${(props) => props.theme.mainColor};
     }
-  }
-
-  .quantity {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 12px;
-    left: 48px;
-    border-radius: 100px;
-    width: 20px;
-    height: 20px;
-    background-color: ${(props) => props.theme.quantityColor};
-    color: ${(props) => props.theme.whiteColor};
-    z-index: ${(props) => props.theme.quantityZIndex};
-    font-size: 0.9rem;
   }
 `;
 
@@ -63,7 +48,9 @@ export const NavRightWrapper = () => {
             width="24"
             height="24"
           />
-          {cart.length > 0 && <span className="quantity">{cart.length}</span>}
+          {cart.length > 0 && (
+            <Counter key={cart.length % 2} quantity={cart.length} />
+          )}
         </div>
         <CartTextStyled>Корзина</CartTextStyled>
       </NavRightWrapperStyled>

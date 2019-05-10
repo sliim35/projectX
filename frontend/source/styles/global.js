@@ -46,6 +46,10 @@ export const GlobalStyle = createGlobalStyle`
         url(${displayMediumTtf}) format('truetype');
   }
 
+  body {
+    font-family: 'SFPro Text', sans-serif
+  }
+
   a {
     text-decoration: none;
   }
