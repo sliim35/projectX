@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import { ProductsListStyled } from './ProductsListStyled';
 import { Icon } from '../../components/icon/Icon';
+import { Total } from '../../components/total/Total';
 import trashIcon from '../../static/icons/trash.svg';
 import rubleIcon from '../../static/icons/ruble.svg';
 
@@ -70,6 +71,7 @@ export function ProductsList() {
           </div>
         </li>
       ))}
+      <Total />
     </ProductsListStyled>
   );
 }

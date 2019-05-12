@@ -13,12 +13,16 @@ const TotalStyled = styled.div`
   width: 100%;
   font-size: 1.5rem;
   color: ${(props) => props.theme.titleColor};
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 
   svg {
     z-index: 1;
     opacity: 0.7;
   }
+`;
+
+const Sum = styled.span`
+  margin-right: 2rem;
 `;
 
 export function Total() {
@@ -28,7 +32,7 @@ export function Total() {
   return (
     <TotalStyled>
       <span>Всего:</span>
-      <span>
+      <Sum>
         {parseFloat(
           cart.reduce(
             (accumulator, product) =>
@@ -43,7 +47,7 @@ export function Total() {
           height="22"
           ml="8"
         />
-      </span>
+      </Sum>
     </TotalStyled>
   );
 }

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { CartContext } from '../../store/contexts/CartContext';
 import { client } from '../../../tools/graphqlClient';
 import { CREATE_REQUEST_MUTATION } from '../../queries/createRequest';
+import * as constants from '../../store/constants';
 
 import { Input } from '../input/Input';
 
@@ -34,7 +35,7 @@ const OrderButtonStyled = styled.button`
 `;
 
 export function ContactsForm() {
-  const { cartState } = useContext(CartContext);
+  const { cartState, cartDispatch } = useContext(CartContext);
   const [successMessage, setSuccesMessage] = useState(false);
   const { cart } = cartState;
 
@@ -58,7 +59,10 @@ export function ContactsForm() {
       onSubmit={async (e) => {
         e.preventDefault();
         const msg = await sendRequest();
-        if (msg === 'Заявка отправлена') setSuccesMessage(true);
+        if (msg === 'Заявка отправлена') {
+          setSuccesMessage(true);
+          cartDispatch({ type: constants.CLEAR_CART, payload: [] });
+        }
       }}
     >
       <Input name="name" type="text" placeholder="ФИО" required />
