@@ -1,5 +1,6 @@
 const white = '#fff';
 const lightGrey = '#eee';
+const grey = '#f8f8fa';
 const black = 'rgba(0,0,0, .56)';
 const yellow = '#feb818';
 const darkYellow = '#ffa532';
@@ -17,7 +18,8 @@ export const theme = {
   navBarShadowColor: '1px 2px 4px 0 rgba(0,0,0,.03)',
   searchResultBarShadow: '1px 4px 8px 0 rgba(0,0,0,.15)',
   borderColor: lightGrey,
-  sideBarColor: '#f8f8fa',
+  sideBarColor: grey,
+  notificationBackgroundColor: grey,
   textColor: '#676767',
   titleColor: '#252525',
   activeColor: darkYellow,
@@ -33,6 +35,7 @@ export const theme = {
   quantityZIndex: 102,
   quantityColor: green,
   successColor: green,
+  success: green,
   whiteColor: white,
   dangerColor: red,
 };

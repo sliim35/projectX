@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { CartContext } from '../../store/contexts/CartContext';
 import { client } from '../../../tools/graphqlClient';
 import { CREATE_REQUEST_MUTATION } from '../../queries/createRequest';
-import * as constants from '../../store/constants';
 
 import { Input } from '../input/Input';
+import { Notification } from '../notification/Notification';
 
 const OrderButtonStyled = styled.button`
   color: ${(props) => props.theme.titleColor};
@@ -23,7 +23,7 @@ const OrderButtonStyled = styled.button`
   border-radius: 4px;
   font-weight: 400;
   margin-bottom: 1rem;
-  transition-duration: 1s;
+  transition-duration: 300ms;
   cursor: pointer;
   height: 48px;
   margin-top: 2rem;
@@ -35,7 +35,7 @@ const OrderButtonStyled = styled.button`
 `;
 
 export function ContactsForm() {
-  const { cartState, cartDispatch } = useContext(CartContext);
+  const { cartState } = useContext(CartContext);
   const [successMessage, setSuccesMessage] = useState(false);
   const { cart } = cartState;
 
@@ -54,35 +54,42 @@ export function ContactsForm() {
   }
 
   return (
-    <form
-      name="order"
-      onSubmit={async (e) => {
-        e.preventDefault();
-        const msg = await sendRequest();
-        if (msg === 'Заявка отправлена') {
-          setSuccesMessage(true);
-          cartDispatch({ type: constants.CLEAR_CART, payload: [] });
-        }
-      }}
-    >
-      <Input name="name" type="text" placeholder="ФИО" required />
-      <Input name="tel" type="tel" placeholder="Телефон для связи" required />
-      <Input
-        name="inn"
-        type="number"
-        placeholder="ИНН для выставления счета"
-        required
+    <>
+      <Notification
+        text="Заявка отправлена"
+        messageType="success"
+        show={successMessage}
       />
-      <Input
-        name="email"
-        type="email"
-        placeholder="Email для отправки счета"
-        required
-      />
-      <Input name="notation" type="text" placeholder="Примечание" />
-      <OrderButtonStyled type="submit">
-        {successMessage ? 'Заявка успешно отправлена' : 'Оформить заказ'}
-      </OrderButtonStyled>
-    </form>
+      <form
+        name="order"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const msg = await sendRequest();
+          if (msg === 'Заявка отправлена') {
+            setSuccesMessage(true);
+            // cartDispatch({ type: constants.CLEAR_CART, payload: [] });
+          }
+        }}
+      >
+        <Input name="name" type="text" placeholder="ФИО" required />
+        <Input name="tel" type="tel" placeholder="Телефон для связи" required />
+        <Input
+          name="inn"
+          type="number"
+          placeholder="ИНН для выставления счета"
+          required
+        />
+        <Input
+          name="email"
+          type="email"
+          placeholder="Email для отправки счета"
+          required
+        />
+        <Input name="notation" type="text" placeholder="Примечание" />
+        <OrderButtonStyled disabled={successMessage} type="submit">
+          Оформить заказ
+        </OrderButtonStyled>
+      </form>
+    </>
   );
 }
