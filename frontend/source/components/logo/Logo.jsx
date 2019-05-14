@@ -1,8 +1,7 @@
 import React from 'react';
-
-import logo from '../../static/images/logo.png';
-
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import logo from '../../static/images/logo.png';
 
 const LogoStyled = styled.img`
   width: 120px;
@@ -10,5 +9,9 @@ const LogoStyled = styled.img`
 `;
 
 export const Logo = () => {
-  return <LogoStyled src={logo} alt="Kantu" />;
+  return (
+    <Link to="/">
+      <LogoStyled src={logo} alt="Kantu" />
+    </Link>
+  );
 };

@@ -3,6 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import { Query } from 'react-apollo';
 
 import { Category } from '../category/Category';
+import { CategoryLoader } from '../category-loader/CategoryLoader';
 import { Icon } from '../icon/Icon';
 import minusIcon from '../../static/icons/minus.svg';
 import plusIcon from '../../static/icons/plus.svg';
@@ -24,7 +25,7 @@ export const SideBarList = () => {
     <>
       <Query query={queries.CATALOGUES_QUERY}>
         {({ loading, error, data }) => {
-          if (loading) return 'Категории загружаются...';
+          if (loading) return <CategoryLoader />;
           if (error) return `Error! ${error.message}`;
 
           return (
