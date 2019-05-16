@@ -19,12 +19,12 @@ const InputWrapperStyled = styled.div`
 `;
 
 export const NavContainer = (props) => {
-  const { setSearching } = props;
+  const { setSearching, isSearching } = props;
 
   return (
     <NavContainerStyled>
       <InputWrapperStyled>
-        <NavSearch setSearching={setSearching} />
+        <NavSearch setSearching={setSearching} isSearching={isSearching} />
       </InputWrapperStyled>
       <NavRightWrapper />
     </NavContainerStyled>
@@ -33,8 +33,10 @@ export const NavContainer = (props) => {
 
 NavContainer.propTypes = {
   setSearching: PropTypes.func,
+  isSearching: PropTypes.bool,
 };
 
 NavContainer.defaultProps = {
   setSearching: () => null,
+  isSearching: false,
 };

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const IconStyled = styled.svg`
   position: ${(props) => props.position};
   top: ${(props) => props.top}%;
+  right: ${(props) => props.right};
   margin-left: ${(props) => props.ml}px;
   transform: translateY(${(props) => props.coordY}%);
   width: ${(props) => props.width || 24}px;
@@ -32,6 +33,7 @@ export const Icon = (props) => {
     width,
     height,
     top,
+    right,
     ml,
     position,
     isSpinner,
@@ -43,6 +45,7 @@ export const Icon = (props) => {
       width={width}
       height={height}
       top={top}
+      right={right}
       viewBox={viewBox}
       ml={ml}
       position={position}
@@ -61,6 +64,7 @@ Icon.propTypes = {
   viewBox: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
+  right: PropTypes.string,
   top: PropTypes.string,
   ml: PropTypes.string,
   position: PropTypes.string,
@@ -72,6 +76,7 @@ Icon.defaultProps = {
   width: '24',
   height: '24',
   top: '48',
+  right: null,
   ml: '32',
   position: 'absolute',
   isSpinner: false,

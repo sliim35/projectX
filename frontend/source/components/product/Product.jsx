@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Icon } from '../icon/Icon';
 import rubleIcon from '../../static/icons/ruble.svg';
 import archiveIcon from '../../static/icons/archive.svg';
+import { media } from '../../styles/media';
 
 import { Link } from 'react-router-dom';
 
@@ -32,6 +33,26 @@ const ProductWrapperStyled = styled.div`
   &:nth-of-type(4n) {
     margin-right: 0;
   }
+
+  ${media.containerDesktop`
+    &:nth-of-type(4n) {
+      margin-right: 16px;
+    }
+
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+  `}
+
+  ${media.containerTablet`
+    &:nth-of-type(3n) {
+      margin-right: 16px;
+    }
+
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
+  `}
 
   .image {
     display: flex;

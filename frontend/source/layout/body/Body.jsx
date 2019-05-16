@@ -66,7 +66,10 @@ export const Body = () => {
               <SideBarList />
             </SideBar>
             <NavBar>
-              <NavContainer setSearching={setSearching} />
+              <NavContainer
+                setSearching={setSearching}
+                isSearching={isSearching}
+              />
             </NavBar>
 
             <SearchResultBarContainer style={animated}>

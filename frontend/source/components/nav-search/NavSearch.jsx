@@ -7,8 +7,10 @@ import { SEARCH_QUERY, GET_PRODUCTS } from '../../store/constants';
 import * as queries from '../../queries';
 import searchIcon from '../../static/icons/search.svg';
 import spinnerIcon from '../../static/icons/spinner.svg';
+import timesIcon from '../../static/icons/times.svg';
 
 import { Icon } from '../../components/icon/Icon';
+import { ButtonIcon } from '../../components/button-icon/ButtonIcon';
 
 import { NavSearchStyled } from './styles/NavSearchStyled';
 
@@ -42,7 +44,7 @@ export const NavSearch = (props) => {
   }, [value]);
 
   return (
-    <NavSearchStyled>
+    <NavSearchStyled border={value}>
       {isLoading ? (
         <Icon
           glyph={spinnerIcon.id}
@@ -74,6 +76,16 @@ export const NavSearch = (props) => {
         onChange={(e) => setValue(e.target.value)}
         value={value}
       />
+      {value && (
+        <ButtonIcon
+          onClick={() => setValue('')}
+          glyph={timesIcon.id}
+          viewBox={timesIcon.viewBox}
+          right="0"
+          width="16"
+          height="16"
+        />
+      )}
     </NavSearchStyled>
   );
 };

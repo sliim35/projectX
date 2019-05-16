@@ -8,6 +8,7 @@ const ProductGridStyled = styled.div`
   flex-wrap: wrap;
   background-color: #fff;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const ProductsGrid = (props) => {

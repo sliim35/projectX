@@ -9,7 +9,8 @@ export const NavSearchStyled = styled.div`
   .search-input {
     font-size: 1rem;
     color: ${(props) => props.theme.textColor};
-    border: 1px solid transparent;
+    border: 1px solid ${(props) => (props.border ? '#dfe1e5' : 'transparent')};
+    border-radius: 4px;
     margin-left: 16px;
     width: 100%;
     max-width: 500px;
