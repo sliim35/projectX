@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import { TitleStyled } from './styles/TitleStyled';
 
-export const Text = ({ children }) => {
+export const Title = ({ children }) => {
   return <TitleStyled>{children}</TitleStyled>;
 };
 
-Text.propTypes = {
+Title.propTypes = {
   children: PropTypes.node.isRequired,
 };

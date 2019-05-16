@@ -4,4 +4,5 @@ export const TextStyled = styled.p`
   font-size: 1rem;
   text-align: left;
   color: ${(props) => props.theme.textColor};
+  line-height: ${(props) => props.lineHeight};
 `;

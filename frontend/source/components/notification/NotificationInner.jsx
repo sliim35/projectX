@@ -13,7 +13,12 @@ const NotificationWrapper = styled(animated.div)`
   min-width: 300px;
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.borderColor};
-  color: ${(props) => props.messageType && props.theme.success};
+  color: ${(props) =>
+    props.messageType === 'success'
+      ? props.theme.success
+      : props.messageType === 'error'
+      ? props.theme.error
+      : props.theme.textColor};
   background-color: ${(props) => props.theme.notificationBackgroundColor};
 `;
 
@@ -28,6 +33,8 @@ export function NotificationInner({ text, show, messageType }) {
       await next({ height: 0 });
     },
   });
+
+  console.log(messageType);
 
   useEffect(() => {
     if (show) {

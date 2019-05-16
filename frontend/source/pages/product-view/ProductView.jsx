@@ -30,7 +30,8 @@ const ProductViewStyled = styled.section`
     justify-content: center;
     align-items: center;
     width: 50%;
-    max-height: auto;
+    max-height: 400px;
+    height: auto;
     overflow: hidden;
     margin-right: auto;
   }

@@ -36,6 +36,7 @@ export const theme = {
   quantityColor: green,
   successColor: green,
   success: green,
+  error: red,
   whiteColor: white,
   dangerColor: red,
 };
