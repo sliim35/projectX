@@ -14,6 +14,8 @@ export const PRODUCT_QUERY = gql`
       }
       price
       stock
+      description
+      unit
     }
   }
 `;

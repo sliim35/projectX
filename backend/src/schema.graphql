@@ -20,6 +20,7 @@ type Manufacturer {
 type Product {
   id: ID!
   article: String
+  unit: String
   name: String!
   name_parameterized: String!
   image_path: String
@@ -27,6 +28,7 @@ type Product {
   manufacturer: Manufacturer!
   price: Float
   stock: Int!
+  description: String
 }
 
 type Pagination {

@@ -44,5 +44,5 @@ export const Query = {
     );
 
     return data;
-  }
+  },
 };

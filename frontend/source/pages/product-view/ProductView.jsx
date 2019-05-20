@@ -102,7 +102,7 @@ const InputQuantityStyled = styled.input`
   width: 50%;
   height: 48px;
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid ${(props) => props.theme.borderColor};
   margin-right: 1rem;
 
@@ -131,7 +131,7 @@ export const ProductView = (props) => {
         if (error) return `Error! ${error.message}`;
         if (loading) return null;
         if (product) setCurrentProduct(product);
-
+        console.log(product);
         return (
           <Content>
             <Container>
@@ -185,7 +185,7 @@ export const ProductView = (props) => {
                   <div className="actions">
                     <InputQuantityStyled
                       type="number"
-                      placeholder="20 шт."
+                      placeholder="Например, 20 шт."
                       onChange={(e) => setQuantity(e.target.value)}
                       disabled={isBuyButtonDisabled()}
                     />
