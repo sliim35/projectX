@@ -4,7 +4,8 @@
   "description": "Kantu server",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js --ext js,graphql --exec babel-node"
+    "start": "nodemon src/index.js --ext js,graphql --exec babel-node",
+    "server": "babel-node src/index.js"
   },
   "author": "",
   "license": "ISC",

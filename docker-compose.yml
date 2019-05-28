@@ -1,0 +1,21 @@
+version: '2.4'
+
+services:
+  proxy:
+    image: kantu_v2/proxy
+    build: ./proxy
+    container_name: proxy
+    restart: always
+    ports:
+      - 80:80
+
+  api:
+    image: kantu_v2/server
+    build: ./backend
+    container_name: api
+    env_file: ./backend/.env
+
+  client:
+    image: kantu_v2/client
+    build: ./frontend
+    container_name: client

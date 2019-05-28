@@ -131,7 +131,7 @@ export const ProductView = (props) => {
         if (error) return `Error! ${error.message}`;
         if (loading) return null;
         if (product) setCurrentProduct(product);
-        console.log(product);
+
         return (
           <Content>
             <Container>

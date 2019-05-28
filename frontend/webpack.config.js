@@ -1,7 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import dotenv from 'dotenv';
 
@@ -88,7 +88,7 @@ module.exports = {
     noEmitOnErrors: isDebug,
     concatenateModules: true,
     minimize: !isDebug,
-    minimizer: [new UglifyJsPlugin()],
+    minimizer: [new TerserPlugin()],
   },
 
   performance: {
