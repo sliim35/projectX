@@ -23,8 +23,7 @@ import { BodyStyled } from './styles/BodyStyled';
 const footerItems = ['Статьи', 'О компании', 'Контакты', 'Центр помощи'];
 
 const LogoWrapperStyled = styled.div`
-  margin: 8px 0;
-  padding: 12px 16px;
+  padding: 0 12px;
 `;
 
 const SearchResultBarContainer = styled(animated.div)`

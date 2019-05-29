@@ -18,7 +18,7 @@ export const Home = () => {
   return (
     <Content>
       <Container>
-        <LeadTitle>Успех начинается с Kantu!</LeadTitle>
+        <LeadTitle>Положительный контакт вместе с Kantu!</LeadTitle>
         <DescriptionWrapper>
           <Title>Чем мы занимаемся?</Title>
           <Text lineHeight="1.8">

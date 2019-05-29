@@ -2,12 +2,13 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const isDebug = process.argv.includes('--debug');
 const isAnalyse = process.argv.includes('--analyse');
 const API = isDebug
-  ? JSON.stringify('localhost:3000/graphql')
+  ? JSON.stringify('http://localhost:8000/graphql')
   : JSON.stringify('/graphql');
 
 module.exports = {
@@ -72,6 +73,10 @@ module.exports = {
       title: 'Электрооборудование в один клик',
       base: '/',
     }),
+
+    new FaviconsWebpackPlugin(
+      path.resolve(__dirname, './source/static/images/favicon.png')
+    ),
 
     ...(isAnalyse ? [new BundleAnalyzerPlugin()] : []),
   ],
