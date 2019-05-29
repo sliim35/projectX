@@ -16,6 +16,6 @@ WORKDIR /kantu_v2
 
 COPY ./nginx.conf  /etc/nginx/nginx.conf
 
-COPY --from=builder /kantu_v2/public /usr/share/nginx/html
+COPY --from=builder /kantu_v2/public ./
 
 EXPOSE 3000

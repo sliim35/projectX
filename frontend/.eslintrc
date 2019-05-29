@@ -15,6 +15,10 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "API": true,
+    "__DEV__": true
+  },
   "parserOptions": {
     "ecmaVersion": 2018,
     "ecmaFeatures": {

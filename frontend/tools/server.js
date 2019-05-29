@@ -4,7 +4,7 @@ import config from '../webpack.config';
 
 const options = {
   hot: true,
-  host: 'localhost',
+  host: '0.0.0.0',
   historyApiFallback: true,
   contentBase: config.output.path,
   watchContentBase: true,
@@ -16,5 +16,5 @@ const compiler = webpack(config);
 const server = new WebpackDevServer(compiler, options);
 
 server.listen(3000, 'localhost', () => {
-  console.log('dev server listening on port 3000');
+  console.log('Starting on localhost:3000...');
 });

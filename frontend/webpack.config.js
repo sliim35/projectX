@@ -3,12 +3,12 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import dotenv from 'dotenv';
-
-dotenv.load();
 
 const isDebug = process.argv.includes('--debug');
 const isAnalyse = process.argv.includes('--analyse');
+const API = isDebug
+  ? JSON.stringify('localhost:3000/graphql')
+  : JSON.stringify('/graphql');
 
 module.exports = {
   mode: isDebug ? 'development' : 'production',
@@ -19,7 +19,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'public'),
-    publicPath: isDebug ? '/' : '',
+    publicPath: '/',
     filename: isDebug ? '[name].js' : '[name].[hash].js',
     chunkFilename: isDebug ? '[id].[name].js' : '[id].[hash].js',
   },
@@ -59,6 +59,7 @@ module.exports = {
 
     new webpack.DefinePlugin({
       __DEV__: isDebug,
+      API,
     }),
 
     new HtmlWebpackPlugin({
@@ -69,6 +70,7 @@ module.exports = {
       },
       cache: false, // Emit the file only if it was changed
       title: 'Электрооборудование в один клик',
+      base: '/',
     }),
 
     ...(isAnalyse ? [new BundleAnalyzerPlugin()] : []),
