@@ -27,7 +27,7 @@ yarn.lock
 .eslintcache
 
 # dotenv environment variables file
-.env
+# .env
 
 # IDE project files
 .DS_Store
