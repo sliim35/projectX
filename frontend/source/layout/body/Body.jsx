@@ -1,11 +1,7 @@
-import React, { useContext, useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
-
-import ProductsContext from '../../store';
-import { CartContext } from '../../store/contexts/CartContext';
-import * as reducers from '../../store/reducers';
 
 import { SideBar } from '../../components/side-bar/SideBar';
 import { NavBar } from '../../components/nav-bar/NavBar';
@@ -35,16 +31,7 @@ const SearchResultBarContainer = styled(animated.div)`
 
 export const Body = () => {
   const [isSearching, setSearching] = useState(false);
-  const productsInitialState = useContext(ProductsContext);
-  const [productsState, productsDispatch] = useReducer(
-    reducers.productsReducer,
-    productsInitialState
-  );
-  const cartInitialState = useContext(CartContext);
-  const [cartState, cartDispatch] = useReducer(
-    reducers.cartReducer,
-    cartInitialState
-  );
+
   const animated = useSpring({
     opacity: `${isSearching ? 1 : 0}`,
     zIndex: `${isSearching ? 101 : 0}`,
@@ -54,35 +41,28 @@ export const Body = () => {
   });
 
   return (
-    <ProductsContext.Provider value={{ productsState, productsDispatch }}>
-      <CartContext.Provider value={{ cartState, cartDispatch }}>
-        <Router>
-          <BodyStyled>
-            <SideBar>
-              <LogoWrapperStyled>
-                <Logo />
-              </LogoWrapperStyled>
-              <SideBarList />
-            </SideBar>
-            <NavBar>
-              <NavContainer
-                setSearching={setSearching}
-                isSearching={isSearching}
-              />
-            </NavBar>
+    <Router>
+      <BodyStyled>
+        <SideBar>
+          <LogoWrapperStyled>
+            <Logo />
+          </LogoWrapperStyled>
+          <SideBarList />
+        </SideBar>
+        <NavBar>
+          <NavContainer setSearching={setSearching} isSearching={isSearching} />
+        </NavBar>
 
-            <SearchResultBarContainer style={animated}>
-              <SearchResultBar>
-                <SearchResultList />
-              </SearchResultBar>
-            </SearchResultBarContainer>
-            {isSearching && <Overlay />}
+        <SearchResultBarContainer style={animated}>
+          <SearchResultBar>
+            <SearchResultList />
+          </SearchResultBar>
+        </SearchResultBarContainer>
+        {isSearching && <Overlay />}
 
-            <Routes />
-            <Footer items={footerItems} />
-          </BodyStyled>
-        </Router>
-      </CartContext.Provider>
-    </ProductsContext.Provider>
+        <Routes />
+        <Footer items={footerItems} />
+      </BodyStyled>
+    </Router>
   );
 };

@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Query } from 'react-apollo';
 
-import { CartContext } from '../../store/contexts/CartContext';
-import { ADD_PRODUCT_IN_CART } from '../../store/constants';
+import * as actionCreators from '../../store/actions';
 import * as queries from '../../queries/product';
 import rubleIcon from '../../static/icons/ruble.svg';
 
@@ -34,6 +35,7 @@ const ProductViewStyled = styled.section`
     height: auto;
     overflow: hidden;
     margin-right: auto;
+    padding: 32px;
   }
 
   .info {
@@ -111,15 +113,13 @@ const InputQuantityStyled = styled.input`
   }
 `;
 
-export const ProductView = (props) => {
+const ProductView = (props) => {
   const [quantity, setQuantity] = useState(0);
   const [currentProduct, setCurrentProduct] = useState({});
   const { product_id } = props.match.params;
-  const { cartDispatch, cartState } = useContext(CartContext);
+  const { actions, cart } = props;
 
   function isBuyButtonDisabled() {
-    const { cart } = cartState;
-
     if (cart.length > 0) {
       return cart.some((product) => product.id === currentProduct.id);
     }
@@ -176,10 +176,7 @@ export const ProductView = (props) => {
                     };
                     const payload = Object.assign(quantityObj, product);
 
-                    cartDispatch({
-                      type: ADD_PRODUCT_IN_CART,
-                      payload,
-                    });
+                    actions.addProductInCart(payload);
                   }}
                 >
                   <div className="actions">
@@ -206,6 +203,13 @@ export const ProductView = (props) => {
   );
 };
 
+const ProductViewConnected = connect(
+  ({ cart }) => ({
+    cart,
+  }),
+  (dispatch) => bindActionCreators(actionCreators, dispatch)
+)(ProductView);
+
 ProductView.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -213,3 +217,5 @@ ProductView.propTypes = {
     }),
   }),
 };
+
+export { ProductViewConnected as ProductView };

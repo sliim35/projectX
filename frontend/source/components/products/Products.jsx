@@ -1,26 +1,26 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Waypoint } from 'react-waypoint';
 
-import ProductsContext from '../../store';
-import { GET_PRODUCTS } from '../../store/constants';
+import * as actionCreators from '../../store/actions';
+import { ProductsType, PaginationType } from '../../types';
 
 import { Product } from '../../components/product/Product';
 
-import { ProductsType, PaginationType } from '../../types';
-
-export const Products = (props) => {
-  const { productsDispatch } = useContext(ProductsContext);
+const Products = (props) => {
   const {
     data: {
       products_category: { products },
     },
     onLoadMore,
     pagination,
+    actions,
   } = props;
 
   useEffect(() => {
-    productsDispatch({ type: GET_PRODUCTS, payload: products });
+    actions.getProducts(products);
   }, [products]);
 
   return (
@@ -43,6 +43,11 @@ export const Products = (props) => {
   );
 };
 
+const ProductsConnected = connect(
+  null,
+  (dispatch) => bindActionCreators(actionCreators, dispatch)
+)(Products);
+
 Products.propTypes = {
   data: PropTypes.shape({
     products_category: PropTypes.shape({
@@ -52,3 +57,5 @@ Products.propTypes = {
   onLoadMore: PropTypes.func.isRequired,
   pagination: PaginationType.isRequired,
 };
+
+export { ProductsConnected as Products };

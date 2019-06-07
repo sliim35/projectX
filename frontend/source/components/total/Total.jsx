@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import { Icon } from '../../components/icon/Icon';
 import rubleIcon from '../../static/icons/ruble.svg';
-import { CartContext } from '../../store/contexts/CartContext.js';
 
 const TotalStyled = styled.div`
   display: flex;
@@ -25,10 +25,7 @@ const Sum = styled.span`
   margin-right: 2rem;
 `;
 
-export function Total() {
-  const { cartState } = useContext(CartContext);
-  const { cart } = cartState;
-
+function Total({ cart }) {
   return (
     <TotalStyled>
       <span>Всего:</span>
@@ -51,3 +48,6 @@ export function Total() {
     </TotalStyled>
   );
 }
+
+const TotalConnected = connect(({ cart }) => ({ cart }))(Total);
+export { TotalConnected as Total };

@@ -1,6 +1,11 @@
 import { GET_PRODUCTS, SEARCH_QUERY } from '../constants';
 
-export function productsReducer(state, action) {
+const initialState = {
+  products: [],
+  query: '',
+};
+
+export function productsReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
       return {

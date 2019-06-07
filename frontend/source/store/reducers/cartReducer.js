@@ -1,6 +1,10 @@
 import { ADD_PRODUCT_IN_CART, REMOVE_PRODUCT, CLEAR_CART } from '../constants';
 
-export function cartReducer(state, action) {
+const initialState = {
+  cart: [],
+};
+
+export function cartReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_PRODUCT_IN_CART:
       return {

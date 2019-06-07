@@ -1,22 +1,21 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { ProductsListStyled } from './ProductsListStyled';
-import { Icon } from '../../components/icon/Icon';
-import { Total } from '../../components/total/Total';
+import * as helpers from '../../helpers';
+import * as actionCreators from '../../store/actions';
+
 import trashIcon from '../../static/icons/trash.svg';
 import rubleIcon from '../../static/icons/ruble.svg';
 
-import * as helpers from '../../helpers';
+import { Icon } from '../../components/icon/Icon';
+import { Total } from '../../components/total/Total';
 
-import { CartContext } from '../../store/contexts/CartContext';
-import { REMOVE_PRODUCT } from '../../store/constants';
+import { ProductsListStyled } from './ProductsListStyled';
 
 const TEXENERGO_CDN = 'https://cdn.texenergo.com';
 
-export function ProductsList() {
-  const { cartState, cartDispatch } = useContext(CartContext);
-  const { cart } = cartState;
-
+function ProductsList({ actions, cart }) {
   return (
     <ProductsListStyled>
       {cart.map((product) => (
@@ -50,12 +49,7 @@ export function ProductsList() {
             </div>
             <button
               className="actions"
-              onClick={() =>
-                cartDispatch({
-                  type: REMOVE_PRODUCT,
-                  payload: product.id,
-                })
-              }
+              onClick={() => actions.removeProductFromCart(product.id)}
             >
               <Icon
                 position="unset"
@@ -75,3 +69,10 @@ export function ProductsList() {
     </ProductsListStyled>
   );
 }
+
+const ProductsListConnected = connect(
+  ({ cart }) => ({ cart }),
+  (dispatch) => bindActionCreators(actionCreators, dispatch)
+)(ProductsList);
+
+export { ProductsListConnected as ProductsList };

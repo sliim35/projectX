@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { CartContext } from '../../store/contexts/CartContext';
 import shoppingCartIcon from '../../static/icons/shopping-cart.svg';
 
 import { Icon } from '../../components/icon/Icon';
@@ -34,10 +34,7 @@ const LinkStyled = styled(Link)`
   cursor: pointer;
 `;
 
-export const NavRightWrapper = () => {
-  const { cartState } = useContext(CartContext);
-  const { cart } = cartState;
-
+const NavRightWrapper = ({ cart }) => {
   return (
     <LinkStyled to="/cart">
       <NavRightWrapperStyled>
@@ -57,3 +54,9 @@ export const NavRightWrapper = () => {
     </LinkStyled>
   );
 };
+
+const NavRightWrapperConnected = connect(({ cart }) => ({ cart }))(
+  NavRightWrapper
+);
+
+export { NavRightWrapperConnected as NavRightWrapper };
