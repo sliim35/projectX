@@ -45,7 +45,9 @@ const Products = (props) => {
 
 const ProductsConnected = connect(
   null,
-  (dispatch) => bindActionCreators(actionCreators, dispatch)
+  (dispatch) => ({
+    actions: bindActionCreators(actionCreators, dispatch),
+  })
 )(Products);
 
 Products.propTypes = {

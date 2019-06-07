@@ -207,7 +207,9 @@ const ProductViewConnected = connect(
   ({ cart }) => ({
     cart,
   }),
-  (dispatch) => bindActionCreators(actionCreators, dispatch)
+  (dispatch) => ({
+    actions: bindActionCreators(actionCreators, dispatch),
+  })
 )(ProductView);
 
 ProductView.propTypes = {

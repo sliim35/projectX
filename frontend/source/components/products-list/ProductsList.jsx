@@ -72,7 +72,9 @@ function ProductsList({ actions, cart }) {
 
 const ProductsListConnected = connect(
   ({ cart }) => ({ cart }),
-  (dispatch) => bindActionCreators(actionCreators, dispatch)
+  (dispatch) => ({
+    actions: bindActionCreators(actionCreators, dispatch),
+  })
 )(ProductsList);
 
 export { ProductsListConnected as ProductsList };

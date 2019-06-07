@@ -34,8 +34,6 @@ export function NotificationInner({ text, show, messageType }) {
     },
   });
 
-  console.log(messageType);
-
   useEffect(() => {
     if (show) {
       setShow(true);

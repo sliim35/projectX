@@ -56,8 +56,8 @@ const SearchResultList = ({ products, query }) => {
   );
 };
 
-const SearchResultListConnected = connect((products) => ({
-  products: products.products,
-  query: products.query,
+const SearchResultListConnected = connect(({ products, query }) => ({
+  products,
+  query,
 }))(SearchResultList);
 export { SearchResultListConnected as SearchResultList };

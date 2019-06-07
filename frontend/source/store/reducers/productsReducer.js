@@ -1,23 +1,9 @@
-import { GET_PRODUCTS, SEARCH_QUERY } from '../constants';
+import { GET_PRODUCTS } from '../constants';
 
-const initialState = {
-  products: [],
-  query: '',
-};
-
-export function productsReducer(state = initialState, action) {
+export function productsReducer(state = [], action) {
   switch (action.type) {
     case GET_PRODUCTS:
-      return {
-        ...state,
-        products: action.payload,
-      };
-
-    case SEARCH_QUERY:
-      return {
-        ...state,
-        query: action.payload,
-      };
+      return action.payload;
 
     default:
       return state;
