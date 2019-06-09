@@ -85,6 +85,7 @@ export const Category = (props) => {
             }}
             data={children}
             parentCategoryRoute={name_parameterized}
+            onClose={() => setHover(false)}
           />
         )}
       </CategoryStyled>

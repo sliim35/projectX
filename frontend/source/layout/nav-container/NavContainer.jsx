@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { media } from '../../styles/media';
 
-import logo from '../../static/images/favicon.png';
-import barsIcon from '../../static/icons/bars.svg';
+import * as actionCreators from '../../store/actions/menuAction';
 
 import { Icon } from '../../components/icon/Icon';
 import { NavSearch } from '../../components/nav-search/NavSearch';
 import { NavRightWrapper } from '../nav-right-wrapper/NavRightWrapper';
+
+import logo from '../../static/images/favicon.png';
+import barsIcon from '../../static/icons/bars.svg';
 
 const NavContainerStyled = styled.div`
   position: relative;
@@ -56,18 +60,29 @@ const SmallLogo = styled.img`
   `}
 `;
 
-export const NavContainer = (props) => {
-  const { setSearching, isSearching } = props;
+const MenuButton = styled.button`
+  cursor: pointer;
+  display: none;
+
+  ${media.landscapePhone`
+    display: block;
+  `}
+`;
+
+const NavContainer = (props) => {
+  const { setSearching, isSearching, actions } = props;
 
   return (
     <NavContainerStyled>
-      <Icon
-        glyph={barsIcon.id}
-        viewBox={barsIcon.viewBox}
-        width="24"
-        height="24"
-        className="bars-icon"
-      />
+      <MenuButton onClick={() => actions.showMenu(true)}>
+        <Icon
+          glyph={barsIcon.id}
+          viewBox={barsIcon.viewBox}
+          width="24"
+          height="24"
+          className="bars-icon"
+        />
+      </MenuButton>
       <SmallLogo src={logo} alt="Kantu logo" />
       <InputWrapperStyled>
         <NavSearch setSearching={setSearching} isSearching={isSearching} />
@@ -86,3 +101,12 @@ NavContainer.defaultProps = {
   setSearching: () => null,
   isSearching: false,
 };
+
+const NavContainerConnected = connect(
+  null,
+  (dispatch) => ({
+    actions: bindActionCreators(actionCreators, dispatch),
+  })
+)(NavContainer);
+
+export { NavContainerConnected as NavContainer };
