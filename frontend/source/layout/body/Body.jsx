@@ -3,6 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 
+import { useWindowSize } from '../../hooks/useWindowSize';
+
 import { SideBar } from '../../components/side-bar/SideBar';
 import { NavBar } from '../../components/nav-bar/NavBar';
 import { SideBarList } from '../../components/side-bar-list/SideBarList';
@@ -31,12 +33,17 @@ const SearchResultBarContainer = styled(animated.div)`
 
 export const Body = () => {
   const [isSearching, setSearching] = useState(false);
+  const { width } = useWindowSize();
 
   const animated = useSpring({
     opacity: `${isSearching ? 1 : 0}`,
     zIndex: `${isSearching ? 101 : 0}`,
     transform: `translate3d(${
-      isSearching ? '0, 54px, 0px' : '0px, 32px, 0px'
+      isSearching
+        ? width > 767.98
+          ? '0, 54px, 0px'
+          : '0, 90px, 0px'
+        : '0px, 32px, 0px'
     })`,
   });
 

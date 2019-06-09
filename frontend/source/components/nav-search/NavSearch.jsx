@@ -47,6 +47,7 @@ const NavSearch = (props) => {
     <NavSearchStyled border={value}>
       {isLoading ? (
         <Icon
+          className="spinner"
           glyph={spinnerIcon.id}
           viewBox={spinnerIcon.viewBox}
           width="16"

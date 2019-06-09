@@ -38,6 +38,7 @@ export const Icon = (props) => {
     position,
     isSpinner,
     coordY,
+    className,
   } = props;
 
   return (
@@ -51,6 +52,7 @@ export const Icon = (props) => {
       position={position}
       isSpinner={isSpinner}
       coordY={coordY}
+      className={className}
     >
       <use xlinkHref={`#${glyph}`} />
     </IconStyled>

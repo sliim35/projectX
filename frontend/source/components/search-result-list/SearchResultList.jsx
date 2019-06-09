@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { media } from '../../styles/media';
+
 const SearchResultListStyled = styled.ul`
   max-height: 500px;
   overflow-y: scroll;

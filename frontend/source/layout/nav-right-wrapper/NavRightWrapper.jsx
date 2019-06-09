@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { media } from '../../styles/media';
 import shoppingCartIcon from '../../static/icons/shopping-cart.svg';
 
 import { Icon } from '../../components/icon/Icon';
@@ -14,24 +15,40 @@ const NavRightWrapperStyled = styled.button`
   padding-right: 32px;
   cursor: pointer;
 
+  ${media.landscapePhone`
+    padding-right: 0;
+    margin-top: 4px;
+  `}
+
   svg {
     transition-duration: 400ms;
-  }
 
-  &:hover {
-    svg {
-      fill: ${(props) => props.theme.mainColor};
-    }
+    ${media.landscapePhone`
+      position: unset;
+      transform: translateY(0);
+      margin-left: 0;
+    `}
   }
 `;
 
 const CartTextStyled = styled.span`
   padding-left: 64px;
   line-height: 64px;
+
+  ${media.landscapePhone`
+    line-height: unset;
+    display: none;
+  `}
 `;
 
 const LinkStyled = styled(Link)`
   cursor: pointer;
+
+  ${media.landscapePhone`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `}
 `;
 
 const NavRightWrapper = ({ cart }) => {

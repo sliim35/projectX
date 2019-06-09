@@ -134,68 +134,66 @@ const ProductView = (props) => {
 
         return (
           <Content>
-            <Container>
-              <LeadTitle>{product.name}</LeadTitle>
-              <ProductViewStyled>
-                <div className="image">
-                  {product.image_path ? (
-                    <img
-                      src={`${TEXENERGO_CDN}/${product.image_path}`}
-                      alt={product.name}
-                    />
-                  ) : (
-                    <span>Изображение временно отсутствует</span>
-                  )}
+            <LeadTitle>{product.name}</LeadTitle>
+            <ProductViewStyled>
+              <div className="image">
+                {product.image_path ? (
+                  <img
+                    src={`${TEXENERGO_CDN}/${product.image_path}`}
+                    alt={product.name}
+                  />
+                ) : (
+                  <span>Изображение временно отсутствует</span>
+                )}
+              </div>
+              <div className="info">
+                <div className="manufacturer">
+                  {`Производитель: ${product.manufacturer.name}`}
                 </div>
-                <div className="info">
-                  <div className="manufacturer">
-                    {`Производитель: ${product.manufacturer.name}`}
-                  </div>
-                  <div className="price">
-                    {product.price && product.price !== 0 ? (
-                      <>
-                        {parseFloat(product.price).toFixed(2)}
-                        <Icon
-                          glyph={rubleIcon.id}
-                          viewBox={rubleIcon.viewBox}
-                          width="22"
-                          height="22"
-                          ml="8"
-                        />
-                      </>
-                    ) : null}
-                  </div>
+                <div className="price">
+                  {product.price && product.price !== 0 ? (
+                    <>
+                      {parseFloat(product.price).toFixed(2)}
+                      <Icon
+                        glyph={rubleIcon.id}
+                        viewBox={rubleIcon.viewBox}
+                        width="22"
+                        height="22"
+                        ml="8"
+                      />
+                    </>
+                  ) : null}
                 </div>
-                <form
-                  className="quantity-form"
-                  name="quantity"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const quantityObj = {
-                      quantity,
-                    };
-                    const payload = Object.assign(quantityObj, product);
+              </div>
+              <form
+                className="quantity-form"
+                name="quantity"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const quantityObj = {
+                    quantity,
+                  };
+                  const payload = Object.assign(quantityObj, product);
 
-                    actions.addProductInCart(payload);
-                  }}
-                >
-                  <div className="actions">
-                    <InputQuantityStyled
-                      type="number"
-                      placeholder="Например, 20 шт."
-                      onChange={(e) => setQuantity(e.target.value)}
-                      disabled={isBuyButtonDisabled()}
-                    />
-                    <BuyButtonStyled
-                      type="submit"
-                      disabled={isBuyButtonDisabled()}
-                    >
-                      {isBuyButtonDisabled() ? 'Товар в корзине' : 'В корзину'}
-                    </BuyButtonStyled>
-                  </div>
-                </form>
-              </ProductViewStyled>
-            </Container>
+                  actions.addProductInCart(payload);
+                }}
+              >
+                <div className="actions">
+                  <InputQuantityStyled
+                    type="number"
+                    placeholder="Например, 20 шт."
+                    onChange={(e) => setQuantity(e.target.value)}
+                    disabled={isBuyButtonDisabled()}
+                  />
+                  <BuyButtonStyled
+                    type="submit"
+                    disabled={isBuyButtonDisabled()}
+                  >
+                    {isBuyButtonDisabled() ? 'Товар в корзине' : 'В корзину'}
+                  </BuyButtonStyled>
+                </div>
+              </form>
+            </ProductViewStyled>
           </Content>
         );
       }}
