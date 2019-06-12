@@ -11,6 +11,7 @@ export const ContentStyled = styled(animated.main)`
   justify-content: center;
 
   ${media.landscapePhone`
+    padding: 0;
     padding-top: 112px;
   `}
 `;

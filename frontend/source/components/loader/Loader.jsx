@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Icon } from '../../components/icon/Icon';
 import loaderIcon from '../../static/icons/loader.svg';
 
+import { media } from '../../styles/media';
+
 const LoaderWrapperStyled = styled.div`
   position: fixed;
   top: 50%;
@@ -18,8 +20,19 @@ const LoaderWrapperStyled = styled.div`
   justify-content: center;
   transition-duration: 400ms;
 
+  ${media.landscapePhone`
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+  `}
+
   svg {
     margin-left: 120px;
+
+    ${media.landscapePhone`
+      margin: 0;
+    `}
   }
 `;
 

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+import { useWindowSize } from '../../hooks/useWindowSize';
 
 import { Icon } from '../icon/Icon';
 import rubleIcon from '../../static/icons/ruble.svg';
 import archiveIcon from '../../static/icons/archive.svg';
 import { media } from '../../styles/media';
-
-import { Link } from 'react-router-dom';
 
 import { ProductType } from '../../types';
 
@@ -54,6 +55,20 @@ const ProductWrapperStyled = styled.div`
     }
   `}
 
+  ${media.landscapePhone`
+    max-width: 48%;
+    margin: 0;
+    margin-bottom: 8px;
+
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+
+    &:last-of-type {
+      justify-self: flex-start;
+    }
+  `}
+
   .image {
     display: flex;
     align-items: center;
@@ -65,6 +80,11 @@ const ProductWrapperStyled = styled.div`
     overflow: hidden;
     margin-bottom: 1rem;
     flex-grow: 1;
+
+    ${media.landscapePhone`
+      width: 100%;
+      max-height: 120px;
+    `}
   }
 
   .content {
@@ -137,7 +157,17 @@ const StyledLink = styled(Link)`
 `;
 
 export const Product = (props) => {
+  const [phoneView, setPhoneView] = useState(false);
+  const { width } = useWindowSize();
   const { product } = props;
+
+  console.log(width);
+
+  useEffect(() => {
+    if (width < 768) {
+      setPhoneView(true);
+    }
+  }, [width]);
 
   return (
     <ProductWrapperStyled>
@@ -184,7 +214,9 @@ export const Product = (props) => {
           height="14"
           ml="0"
         />
-        <span>{`В наличии: ${product.stock}шт`}</span>
+        <span>{`${
+          phoneView ? product.stock : `В наличии: ${product.stock}`
+        } шт`}</span>
       </div>
     </ProductWrapperStyled>
   );

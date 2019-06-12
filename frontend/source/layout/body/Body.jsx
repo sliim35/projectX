@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { useWindowSize } from '../../hooks/useWindowSize';
 
@@ -14,8 +16,14 @@ import { Overlay } from '../../components/overlay/Overlay';
 import { SearchResultBar } from '../../components/search-result-bar/SearchResultBar';
 import { SearchResultList } from '../../components/search-result-list/SearchResultList';
 import { Logo } from '../../components/logo/Logo';
+import { Icon } from '../../components/icon/Icon';
 import { Routes } from '../../pages/Routes';
 
+import * as actionCreators from '../../store/actions';
+
+import timesIcon from '../../static/icons/times.svg';
+
+import { media } from '../../styles/media';
 import { BodyStyled } from './styles/BodyStyled';
 
 const footerItems = ['Статьи', 'О компании', 'Контакты', 'Центр помощи'];
@@ -31,7 +39,24 @@ const SearchResultBarContainer = styled(animated.div)`
   z-index: ${(props) => props.theme.searchResultBarZIndex};
 `;
 
-export const Body = () => {
+const CloseButton = styled.button`
+  display: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: auto;
+  width: 100%;
+  text-align: right;
+  font-size: 1rem;
+  padding-right: 32px;
+  margin-top: 12px;
+  color: ${(props) => props.theme.textColor};
+
+  ${media.landscapePhone`
+    display: block;
+  `}
+`;
+
+const Body = ({ actions }) => {
   const [isSearching, setSearching] = useState(false);
   const { width } = useWindowSize();
 
@@ -51,6 +76,18 @@ export const Body = () => {
     <Router>
       <BodyStyled>
         <SideBar>
+          <CloseButton onClick={() => actions.hideMenu()}>
+            Закрыть
+            <Icon
+              className="spinner"
+              glyph={timesIcon.id}
+              viewBox={timesIcon.viewBox}
+              width="16"
+              height="16"
+              ml="4"
+              top="45"
+            />
+          </CloseButton>
           <LogoWrapperStyled>
             <Logo />
           </LogoWrapperStyled>
@@ -73,3 +110,12 @@ export const Body = () => {
     </Router>
   );
 };
+
+const BodyConnected = connect(
+  null,
+  (dispatch) => ({
+    actions: bindActionCreators(actionCreators, dispatch),
+  })
+)(Body);
+
+export { BodyConnected as Body };

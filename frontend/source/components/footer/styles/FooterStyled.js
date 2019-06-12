@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../../../styles/media';
 
 export const FooterStyled = styled.footer`
   position: fixed;
@@ -8,6 +9,10 @@ export const FooterStyled = styled.footer`
   padding-left: 240px;
   background-color: #fff;
   z-index: ${(props) => props.theme.footerZIndex};
+
+  ${media.landscapePhone`
+  padding-left: 0;
+  `}
 
   .list-wrapper {
     font-size: inherit;
