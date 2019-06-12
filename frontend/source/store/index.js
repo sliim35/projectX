@@ -12,6 +12,8 @@ export const store = createStore(
   compose(
     applyMiddleware(...middleware),
     compose,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    __DEV__ && window.__REDUX_DEVTOOLS_EXTENSION__
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : compose
   )
 );
