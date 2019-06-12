@@ -1,9 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import ProductsContext from '../../store';
-import { client } from '../../../tools/graphqlClient';
-import { SEARCH_QUERY, GET_PRODUCTS } from '../../store/constants';
+import { client } from '../../libs/graphqlClient';
+import * as actionsCreators from '../../store/actions';
 import * as queries from '../../queries';
 import searchIcon from '../../static/icons/search.svg';
 import spinnerIcon from '../../static/icons/spinner.svg';
@@ -14,11 +15,10 @@ import { ButtonIcon } from '../../components/button-icon/ButtonIcon';
 
 import { NavSearchStyled } from './styles/NavSearchStyled';
 
-export const NavSearch = (props) => {
+const NavSearch = (props) => {
   const [value, setValue] = useState('');
   const [isLoading, setLoading] = useState(false);
-  const { productsDispatch } = useContext(ProductsContext);
-  const { setSearching } = props;
+  const { setSearching, actions } = props;
 
   const getProducts = async () => {
     setLoading(true);
@@ -32,12 +32,12 @@ export const NavSearch = (props) => {
     if (data) {
       const { products } = data;
       setLoading(false);
-      productsDispatch({ type: GET_PRODUCTS, payload: products });
+      actions.getProducts(products);
     }
   };
 
   useEffect(() => {
-    productsDispatch({ type: SEARCH_QUERY, payload: value });
+    actions.setSearchQuery(value);
     if (value) {
       getProducts();
     }
@@ -47,6 +47,7 @@ export const NavSearch = (props) => {
     <NavSearchStyled border={value}>
       {isLoading ? (
         <Icon
+          className="spinner"
           glyph={spinnerIcon.id}
           viewBox={spinnerIcon.viewBox}
           width="16"
@@ -90,6 +91,13 @@ export const NavSearch = (props) => {
   );
 };
 
+const NavSearchConnected = connect(
+  null,
+  (dispatch) => ({
+    actions: bindActionCreators(actionsCreators, dispatch),
+  })
+)(NavSearch);
+
 NavSearch.propTypes = {
   setSearching: PropTypes.func,
 };
@@ -97,3 +105,5 @@ NavSearch.propTypes = {
 NavSearch.defaultProps = {
   setSearching: () => null,
 };
+
+export { NavSearchConnected as NavSearch };

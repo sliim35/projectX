@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Query } from 'react-apollo';
 
-import { CartContext } from '../../store/contexts/CartContext';
-import { ADD_PRODUCT_IN_CART } from '../../store/constants';
+import * as actionCreators from '../../store/actions';
 import * as queries from '../../queries/product';
 import rubleIcon from '../../static/icons/ruble.svg';
 
@@ -34,6 +35,7 @@ const ProductViewStyled = styled.section`
     height: auto;
     overflow: hidden;
     margin-right: auto;
+    padding: 32px;
   }
 
   .info {
@@ -111,15 +113,13 @@ const InputQuantityStyled = styled.input`
   }
 `;
 
-export const ProductView = (props) => {
+const ProductView = (props) => {
   const [quantity, setQuantity] = useState(0);
   const [currentProduct, setCurrentProduct] = useState({});
   const { product_id } = props.match.params;
-  const { cartDispatch, cartState } = useContext(CartContext);
+  const { actions, cart } = props;
 
   function isBuyButtonDisabled() {
-    const { cart } = cartState;
-
     if (cart.length > 0) {
       return cart.some((product) => product.id === currentProduct.id);
     }
@@ -134,77 +134,81 @@ export const ProductView = (props) => {
 
         return (
           <Content>
-            <Container>
-              <LeadTitle>{product.name}</LeadTitle>
-              <ProductViewStyled>
-                <div className="image">
-                  {product.image_path ? (
-                    <img
-                      src={`${TEXENERGO_CDN}/${product.image_path}`}
-                      alt={product.name}
-                    />
-                  ) : (
-                    <span>Изображение временно отсутствует</span>
-                  )}
+            <LeadTitle>{product.name}</LeadTitle>
+            <ProductViewStyled>
+              <div className="image">
+                {product.image_path ? (
+                  <img
+                    src={`${TEXENERGO_CDN}/${product.image_path}`}
+                    alt={product.name}
+                  />
+                ) : (
+                  <span>Изображение временно отсутствует</span>
+                )}
+              </div>
+              <div className="info">
+                <div className="manufacturer">
+                  {`Производитель: ${product.manufacturer.name}`}
                 </div>
-                <div className="info">
-                  <div className="manufacturer">
-                    {`Производитель: ${product.manufacturer.name}`}
-                  </div>
-                  <div className="price">
-                    {product.price && product.price !== 0 ? (
-                      <>
-                        {parseFloat(product.price).toFixed(2)}
-                        <Icon
-                          glyph={rubleIcon.id}
-                          viewBox={rubleIcon.viewBox}
-                          width="22"
-                          height="22"
-                          ml="8"
-                        />
-                      </>
-                    ) : null}
-                  </div>
+                <div className="price">
+                  {product.price && product.price !== 0 ? (
+                    <>
+                      {parseFloat(product.price).toFixed(2)}
+                      <Icon
+                        glyph={rubleIcon.id}
+                        viewBox={rubleIcon.viewBox}
+                        width="22"
+                        height="22"
+                        ml="8"
+                      />
+                    </>
+                  ) : null}
                 </div>
-                <form
-                  className="quantity-form"
-                  name="quantity"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const quantityObj = {
-                      quantity,
-                    };
-                    const payload = Object.assign(quantityObj, product);
+              </div>
+              <form
+                className="quantity-form"
+                name="quantity"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const quantityObj = {
+                    quantity,
+                  };
+                  const payload = Object.assign(quantityObj, product);
 
-                    cartDispatch({
-                      type: ADD_PRODUCT_IN_CART,
-                      payload,
-                    });
-                  }}
-                >
-                  <div className="actions">
-                    <InputQuantityStyled
-                      type="number"
-                      placeholder="Например, 20 шт."
-                      onChange={(e) => setQuantity(e.target.value)}
-                      disabled={isBuyButtonDisabled()}
-                    />
-                    <BuyButtonStyled
-                      type="submit"
-                      disabled={isBuyButtonDisabled()}
-                    >
-                      {isBuyButtonDisabled() ? 'Товар в корзине' : 'В корзину'}
-                    </BuyButtonStyled>
-                  </div>
-                </form>
-              </ProductViewStyled>
-            </Container>
+                  actions.addProductInCart(payload);
+                }}
+              >
+                <div className="actions">
+                  <InputQuantityStyled
+                    type="number"
+                    placeholder="Например, 20 шт."
+                    onChange={(e) => setQuantity(e.target.value)}
+                    disabled={isBuyButtonDisabled()}
+                  />
+                  <BuyButtonStyled
+                    type="submit"
+                    disabled={isBuyButtonDisabled()}
+                  >
+                    {isBuyButtonDisabled() ? 'Товар в корзине' : 'В корзину'}
+                  </BuyButtonStyled>
+                </div>
+              </form>
+            </ProductViewStyled>
           </Content>
         );
       }}
     </Query>
   );
 };
+
+const ProductViewConnected = connect(
+  ({ cart }) => ({
+    cart,
+  }),
+  (dispatch) => ({
+    actions: bindActionCreators(actionCreators, dispatch),
+  })
+)(ProductView);
 
 ProductView.propTypes = {
   match: PropTypes.shape({
@@ -213,3 +217,5 @@ ProductView.propTypes = {
     }),
   }),
 };
+
+export { ProductViewConnected as ProductView };

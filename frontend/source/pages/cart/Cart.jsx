@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
-import { CartContext } from '../../store/contexts/CartContext';
+import { connect } from 'react-redux';
 
 import { Content } from '../../components/content/Content';
 import { LeadTitle } from '../../components/lead-title/LeadTitle';
@@ -29,10 +28,8 @@ const NextStepButton = styled(Button)`
   margin-top: 1rem;
 `;
 
-export const Cart = () => {
+const Cart = ({ cart }) => {
   const [step, setStep] = useState('cartStep');
-  const { cartState } = useContext(CartContext);
-  const { cart } = cartState;
 
   function renderSteps() {
     switch (step) {
@@ -71,3 +68,6 @@ export const Cart = () => {
     </Content>
   );
 };
+
+const CartConnected = connect(({ cart }) => ({ cart }))(Cart);
+export { CartConnected as Cart };

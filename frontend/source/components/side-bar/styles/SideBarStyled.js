@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { sizes } from '../../../styles/media';
 
 export const SideBarStyled = styled.nav`
   position: fixed;
@@ -12,4 +13,8 @@ export const SideBarStyled = styled.nav`
   background-color: ${(props) => props.theme.sideBarColor};
   border-right: 1px solid ${(props) => props.theme.borderColor};
   z-index: ${(props) => props.theme.sideBarZIndex};
+
+  @media (max-width: ${sizes.landscapePhone}px) {
+    display: ${(props) => (props.isMenuOpen ? 'block' : 'none')};
+  }
 `;

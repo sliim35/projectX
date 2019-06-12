@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../../../styles/media';
 
 export const NavBarStyled = styled.nav`
   position: fixed;
@@ -11,4 +12,10 @@ export const NavBarStyled = styled.nav`
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   box-shadow: ${(props) => props.theme.navBarShadowColor};
   z-index: ${(props) => props.theme.navBarZIndex};
+
+  ${media.landscapePhone`
+    width: 100%;
+    left: 0;
+    height: auto;
+  `}
 `;

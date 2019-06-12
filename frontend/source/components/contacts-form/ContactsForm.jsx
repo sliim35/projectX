@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-import { CartContext } from '../../store/contexts/CartContext';
-import { client } from '../../../tools/graphqlClient';
+import { client } from '../../libs/graphqlClient';
 import { CREATE_REQUEST_MUTATION } from '../../queries/createRequest';
 
 import { Input } from '../input/Input';
@@ -34,10 +34,8 @@ const OrderButtonStyled = styled.button`
   }
 `;
 
-export function ContactsForm() {
-  const { cartState } = useContext(CartContext);
+function ContactsForm({ cart }) {
   const [successMessage, setSuccesMessage] = useState(false);
-  const { cart } = cartState;
 
   async function sendRequest() {
     const { data } = await client.mutate({
@@ -67,7 +65,6 @@ export function ContactsForm() {
           const msg = await sendRequest();
           if (msg === 'Заявка отправлена') {
             setSuccesMessage(true);
-            // cartDispatch({ type: constants.CLEAR_CART, payload: [] });
           }
         }}
       >
@@ -93,3 +90,6 @@ export function ContactsForm() {
     </>
   );
 }
+
+const ContactsFormConnected = connect(({ cart }) => ({ cart }))(ContactsForm);
+export { ContactsFormConnected as ContactsForm };

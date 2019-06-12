@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 
+import { media } from '../../styles/media';
+
 const CounterStyled = styled(animated.span)`
   position: absolute;
   display: flex;
@@ -17,6 +19,11 @@ const CounterStyled = styled(animated.span)`
   color: ${(props) => props.theme.whiteColor};
   z-index: ${(props) => props.theme.quantityZIndex};
   font-size: 0.9rem;
+
+  ${media.landscapePhone`
+    top: -8px;
+    left: 24px;
+  `}
 `;
 
 export function Counter({ quantity }) {

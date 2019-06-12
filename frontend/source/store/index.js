@@ -1,8 +1,17 @@
-import { createContext } from 'react';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
 
-const ProductsContext = createContext({
-  products: [],
-  query: '',
-});
+const initialState = {};
 
-export default ProductsContext;
+const middleware = [thunk];
+
+export const store = createStore(
+  combineReducers(rootReducer),
+  initialState,
+  compose(
+    applyMiddleware(...middleware),
+    compose,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);

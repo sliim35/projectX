@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
+import { media } from '../../../styles/media';
 
 export const ContentStyled = styled(animated.main)`
   position: relative;
@@ -8,4 +9,9 @@ export const ContentStyled = styled(animated.main)`
   opacity: 0;
   display: flex;
   justify-content: center;
+
+  ${media.landscapePhone`
+    padding: 0;
+    padding-top: 112px;
+  `}
 `;

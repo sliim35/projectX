@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSpring } from 'react-spring';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import * as actionCreators from '../../store/actions';
 
 import { SubCategory } from '../sub-category/SubCategory';
 
@@ -48,10 +52,11 @@ const CategoryStyled = styled.li`
   }
 `;
 
-export const Category = (props) => {
+const Category = (props) => {
   const [isHover, setHover] = useState(false);
   const {
     data: { id, name_parameterized, name, children },
+    actions,
   } = props;
   const animated = useSpring({
     opacity: `${isHover ? 1 : 0}`,
@@ -74,6 +79,7 @@ export const Category = (props) => {
           to={`/catalogues/${name_parameterized}`}
           className={`${'list-item-link'} ${isHover && 'hovered'}`}
           activeClassName="active"
+          onClick={() => actions.hideMenu()}
         >
           {name}
         </NavLink>
@@ -85,6 +91,7 @@ export const Category = (props) => {
             }}
             data={children}
             parentCategoryRoute={name_parameterized}
+            onClose={() => setHover(false)}
           />
         )}
       </CategoryStyled>
@@ -92,6 +99,15 @@ export const Category = (props) => {
   );
 };
 
+const CategoryConnected = connect(
+  null,
+  (dispatch) => ({
+    actions: bindActionCreators(actionCreators, dispatch),
+  })
+)(Category);
+
 Category.propTypes = {
   data: PropTypes.object.isRequired,
 };
+
+export { CategoryConnected as Category };

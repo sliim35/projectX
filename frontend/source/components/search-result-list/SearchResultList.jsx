@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import ProductsContext from '../../store';
+import { media } from '../../styles/media';
 
 const SearchResultListStyled = styled.ul`
   max-height: 500px;
@@ -29,9 +30,7 @@ const SearchResultListStyled = styled.ul`
   }
 `;
 
-export const SearchResultList = () => {
-  const { productsState } = useContext(ProductsContext);
-  const { products, query } = productsState;
+const SearchResultList = ({ products, query }) => {
   const regexp = new RegExp(query, 'gi');
 
   return (
@@ -58,3 +57,9 @@ export const SearchResultList = () => {
     </SearchResultListStyled>
   );
 };
+
+const SearchResultListConnected = connect(({ products, query }) => ({
+  products,
+  query,
+}))(SearchResultList);
+export { SearchResultListConnected as SearchResultList };

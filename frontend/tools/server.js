@@ -15,6 +15,6 @@ WebpackDevServer.addDevServerEntrypoints(config, options);
 const compiler = webpack(config);
 const server = new WebpackDevServer(compiler, options);
 
-server.listen(3000, 'localhost', () => {
+server.listen(3000, '0.0.0.0', () => {
   console.log('Starting on localhost:3000...');
 });

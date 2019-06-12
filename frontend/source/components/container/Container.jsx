@@ -9,6 +9,10 @@ const StyledContainer = styled.div`
   max-width: 1200px;
   padding: 36px 0;
 
+  ${media.landscapePhone`
+    padding: 0 16px;
+  `}
+
   ${media.containerDesktop`
     max-width: 896px;
   `}

@@ -22,7 +22,7 @@ const SubCategoryStyled = styled(animated.ul)`
 `;
 
 export const SubCategory = (props) => {
-  const { data, onMouseEnter, animated, parentCategoryRoute } = props;
+  const { data, onMouseEnter, animated, parentCategoryRoute, onClose } = props;
 
   return (
     <SubCategoryStyled onMouseEnter={onMouseEnter()} style={animated}>
@@ -32,6 +32,7 @@ export const SubCategory = (props) => {
             to={`/catalogues/${parentCategoryRoute}/${item.name_parameterized}`}
             className="list-item-link"
             activeClassName="active"
+            onClick={() => onClose()}
           >
             {item.name}
           </NavLink>
