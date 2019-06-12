@@ -10,4 +10,4 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh root@165.22.114.59 "git clone git@github.com:sliim35/projectX.git kantu_v2 && cd kantu_v2 && docker-compose up -d --build"
+            ssh root@165.22.114.59 "rm -rf kantu_v2 && git clone git@github.com:sliim35/projectX.git kantu_v2 && cd kantu_v2 && docker-compose up -d --build"
