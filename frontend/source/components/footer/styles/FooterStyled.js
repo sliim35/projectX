@@ -11,7 +11,7 @@ export const FooterStyled = styled.footer`
   z-index: ${(props) => props.theme.footerZIndex};
 
   ${media.landscapePhone`
-  padding-left: 0;
+    padding-left: 0;
   `}
 
   .list-wrapper {

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { media } from '../../../styles/media';
+
 export const SideBarListStyled = styled.div`
   font-size: 1rem;
 
@@ -42,5 +44,9 @@ export const SideBarListStyled = styled.div`
     padding: 0;
     margin: 0;
     overflow: auto;
+
+    ${media.landscapePhone`
+      padding-bottom: 32px;
+    `}
   }
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../../styles/media';
 
 export const ProductsListStyled = styled.ul`
   .product-wrapper {
@@ -9,6 +10,11 @@ export const ProductsListStyled = styled.ul`
     margin-bottom: 1rem;
     border-bottom: 1px solid ${(props) => props.theme.borderColor};
     color: ${(props) => props.theme.textColor};
+
+    ${media.landscapePhone`
+      height: auto;
+      flex-wrap: wrap;
+    `}
   }
 
   .image {

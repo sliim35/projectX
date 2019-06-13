@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { animated, useTransition } from 'react-spring';
 
+import { media } from '../../styles/media';
+
 const NotificationWrapper = styled(animated.div)`
   position: fixed;
   top: 80px;
@@ -20,6 +22,13 @@ const NotificationWrapper = styled(animated.div)`
       ? props.theme.error
       : props.theme.textColor};
   background-color: ${(props) => props.theme.notificationBackgroundColor};
+  z-index: ${(props) => props.theme.notificationZIndex};
+
+  ${media.landscapePhone`
+    width: calc(100vw - 16px);
+    top: 16px;
+    left: 8px;
+  `}
 `;
 
 export function NotificationInner({ text, show, messageType }) {
