@@ -33,6 +33,7 @@ export const theme = {
   searchResultBarZIndex: 101,
   overlayZIndex: 99,
   quantityZIndex: 102,
+  notificationZIndex: 302,
   quantityColor: green,
   successColor: green,
   success: green,
