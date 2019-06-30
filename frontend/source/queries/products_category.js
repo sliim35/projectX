@@ -13,6 +13,11 @@ export const PRODUCTS_CATEGORY_QUERY = gql`
         price
         stock
       }
+      parent {
+        name
+        id
+        name_parameterized
+      }
       pagination {
         page
         pagesTotal

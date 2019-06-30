@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Waypoint } from 'react-waypoint';
 
 import * as actionCreators from '../../store/actions';
-import { ProductsType, PaginationType } from '../../types';
+import * as types from '../../types';
 
 import { Product } from '../../components/product/Product';
 
@@ -53,11 +53,11 @@ const ProductsConnected = connect(
 Products.propTypes = {
   data: PropTypes.shape({
     products_category: PropTypes.shape({
-      products: ProductsType.isRequired,
+      products: types.ProductsType.isRequired,
     }),
   }),
   onLoadMore: PropTypes.func.isRequired,
-  pagination: PaginationType.isRequired,
+  pagination: types.PaginationType.isRequired,
 };
 
 export { ProductsConnected as Products };

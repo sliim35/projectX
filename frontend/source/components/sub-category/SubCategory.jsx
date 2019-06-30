@@ -1,7 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { animated } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 import { NavLink } from 'react-router-dom';
+
+import * as types from '../../types';
 
 const SubCategoryStyled = styled(animated.ul)`
   position: fixed;
@@ -22,22 +25,44 @@ const SubCategoryStyled = styled(animated.ul)`
 `;
 
 export const SubCategory = (props) => {
-  const { data, onMouseEnter, animated, parentCategoryRoute, onClose } = props;
+  const { data, categoryRoute, onClose, isHover } = props;
+
+  const styles = useSpring({
+    opacity: `${isHover ? 1 : 0}`,
+    transform: `translateX(${isHover ? '0' : '-16px'})`,
+  });
 
   return (
-    <SubCategoryStyled onMouseEnter={onMouseEnter()} style={animated}>
-      {data.map((item) => (
-        <li key={item.id}>
-          <NavLink
-            to={`/catalogues/${parentCategoryRoute}/${item.name_parameterized}`}
-            className="list-item-link"
-            activeClassName="active"
-            onClick={() => onClose()}
-          >
-            {item.name}
-          </NavLink>
-        </li>
-      ))}
-    </SubCategoryStyled>
+    <>
+      {data.length > 0 && isHover && (
+        <SubCategoryStyled style={styles}>
+          {data.map((item) => (
+            <li key={item.id}>
+              <NavLink
+                to={`/catalogues/${categoryRoute}/${item.name_parameterized}`}
+                className="list-item-link"
+                activeClassName="active"
+                onClick={onClose}
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
+        </SubCategoryStyled>
+      )}
+    </>
   );
+};
+
+SubCategory.propTypes = {
+  onClose: PropTypes.func,
+  isHover: PropTypes.bool,
+  data: types.MenuCategory.isRequired,
+  categoryRoute: PropTypes.string,
+};
+
+SubCategory.defaultProps = {
+  onClose: () => null,
+  isHover: false,
+  categoryRoute: '',
 };

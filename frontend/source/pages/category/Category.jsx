@@ -6,7 +6,8 @@ import { Content } from '../../components/content/Content';
 import { Loader } from '../../components/loader/Loader';
 import { ProductsGrid } from '../../components/products-grid/ProductsGrid';
 import { Products } from '../../components/products/Products';
-import { LeadTitle } from '../../components/lead-title/LeadTitle';
+import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs';
+import { UtilsBar } from '../../components/utilsBar/UtilsBar';
 
 import * as queries from '../../queries';
 
@@ -26,7 +27,17 @@ export const Category = (props) => {
 
           return (
             <>
-              <LeadTitle>{data.products_category.name}</LeadTitle>
+              <UtilsBar>
+                <Breadcrumbs
+                  breadcrumb={{
+                    id: data.products_category.id,
+                    name: data.products_category.name,
+                    name_parameterized:
+                      data.products_category.name_parameterized,
+                    parent: data.products_category.parent,
+                  }}
+                />
+              </UtilsBar>
               <ProductsGrid>
                 <Products
                   pagination={data.products_category.pagination}

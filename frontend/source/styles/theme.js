@@ -1,6 +1,8 @@
 const white = '#fff';
 const lightGrey = '#eee';
+const asphalt = '#676767';
 const grey = '#f8f8fa';
+const intensiveGrey = '#252525';
 const black = 'rgba(0,0,0, .56)';
 const yellow = '#feb818';
 const darkYellow = '#ffa532';
@@ -20,8 +22,8 @@ export const theme = {
   borderColor: lightGrey,
   sideBarColor: grey,
   notificationBackgroundColor: grey,
-  textColor: '#676767',
-  titleColor: '#252525',
+  textColor: asphalt,
+  titleColor: intensiveGrey,
   activeColor: darkYellow,
   linkColor: blue,
   linkHoverColor: deepBlue,
@@ -40,4 +42,6 @@ export const theme = {
   error: red,
   whiteColor: white,
   dangerColor: red,
+  breadcrumbColor: asphalt,
+  breadcrumbActiveColor: asphalt,
 };

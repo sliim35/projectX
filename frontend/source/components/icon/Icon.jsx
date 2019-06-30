@@ -39,6 +39,7 @@ export const Icon = (props) => {
     isSpinner,
     coordY,
     className,
+    ...rest
   } = props;
 
   return (
@@ -53,6 +54,7 @@ export const Icon = (props) => {
       isSpinner={isSpinner}
       coordY={coordY}
       className={className}
+      {...rest}
     >
       <use xlinkHref={`#${glyph}`} />
     </IconStyled>
@@ -72,6 +74,7 @@ Icon.propTypes = {
   position: PropTypes.string,
   isSpinner: PropTypes.bool,
   coordY: PropTypes.string,
+  className: PropTypes.string,
 };
 
 Icon.defaultProps = {
@@ -83,4 +86,5 @@ Icon.defaultProps = {
   position: 'absolute',
   isSpinner: false,
   coordY: '-50',
+  className: '',
 };

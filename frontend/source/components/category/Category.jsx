@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useSpring } from 'react-spring';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as actionCreators from '../../store/actions';
+import * as types from '../../types/actionCreators';
 
 import { SubCategory } from '../sub-category/SubCategory';
 
@@ -58,10 +58,6 @@ const Category = (props) => {
     data: { id, name_parameterized, name, children },
     actions,
   } = props;
-  const animated = useSpring({
-    opacity: `${isHover ? 1 : 0}`,
-    transform: `translateX(${isHover ? '0' : '-10px'})`,
-  });
 
   return (
     <>
@@ -83,17 +79,13 @@ const Category = (props) => {
         >
           {name}
         </NavLink>
-        {isHover && children.length > 0 && (
-          <SubCategory
-            animated={animated}
-            onMouseEnter={() => {
-              setHover(true);
-            }}
-            data={children}
-            parentCategoryRoute={name_parameterized}
-            onClose={() => setHover(false)}
-          />
-        )}
+
+        <SubCategory
+          isHover={isHover}
+          data={children}
+          categoryRoute={name_parameterized}
+          onClose={() => setHover(false)}
+        />
       </CategoryStyled>
     </>
   );
@@ -108,6 +100,7 @@ const CategoryConnected = connect(
 
 Category.propTypes = {
   data: PropTypes.object.isRequired,
+  actions: types.Actions,
 };
 
 export { CategoryConnected as Category };

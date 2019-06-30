@@ -97,7 +97,8 @@ export const GlobalStyle = createGlobalStyle`
   h5 {
     font-family: 'SFPro Display', sans-serif;
     font-weight: 600;
-    color: ${(props) => props.theme.titleColor}
+    color: ${(props) => props.theme.titleColor};
+    word-break: break-all;
   }
 
   h4,

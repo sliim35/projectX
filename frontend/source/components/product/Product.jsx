@@ -9,7 +9,7 @@ import rubleIcon from '../../static/icons/ruble.svg';
 import archiveIcon from '../../static/icons/archive.svg';
 import { media } from '../../styles/media';
 
-import { ProductType } from '../../types';
+import * as types from '../../types';
 
 const TEXENERGO_CDN = 'https://cdn.texenergo.com';
 
@@ -161,8 +161,6 @@ export const Product = (props) => {
   const { width } = useWindowSize();
   const { product } = props;
 
-  console.log(width);
-
   useEffect(() => {
     if (width < 768) {
       setPhoneView(true);
@@ -223,5 +221,5 @@ export const Product = (props) => {
 };
 
 Product.propTypes = {
-  product: ProductType.isRequired,
+  product: types.ProductType.isRequired,
 };
