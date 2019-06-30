@@ -9,6 +9,7 @@ type SubCategory {
   id: ID!
   name: String!
   name_parameterized: String!
+  parent: Category!
 }
 
 type Manufacturer {
@@ -44,6 +45,7 @@ type ProductsCategory {
   products: [Product!]!
   pagination: Pagination!
   children: [SubCategory]!
+  parent: Category
 }
 
 type Message {
